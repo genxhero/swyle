@@ -3,6 +3,12 @@ import commentsByUser from './queries/comments_by_user';
 import { Query } from 'react-apollo';
 
 
+/**
+ * Displays recent comments by the current user
+ * 
+ * colorScheme: String, color scheme chosen by the user
+ * userId: Integer, primary key for the users table 
+ */
 const UserComments = (props) => {
     return (
         <div className={`user-comments user-comments-${props.colorScheme}`}>
