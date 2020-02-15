@@ -181,15 +181,20 @@
 }
 
 .article-show-body {
-  display: flex;
-  flex-direction: row-reverse;
+  // display: flex;
+  // flex-direction: row-reverse;
   white-space: pre-line;
+  position: relative;
+  width: 100%;
+  text-align: left;
+  padding: 1.5rem;
 }
 
 .article-show-title {
   position: relative;
   width: 100%;
   text-align: center;
+  padding: 1.5rem;
 }
 
 .article-section {
