@@ -3,6 +3,11 @@ import mutation from './mutations/update_user_color_scheme';
 import {graphql} from 'react-apollo';
 import currentUser from './queries/current_user';
 
+/**
+ * Panel for selecting user preferences.
+ *      mutate: Function, provided by graphql.
+ */
+
 const UserOptions  = (props) => {
     const [colorScheme, changeColorScheme] = useState(props.colorScheme)
 
