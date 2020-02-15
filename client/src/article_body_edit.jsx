@@ -16,6 +16,7 @@ class ArticleBodyEdit extends Component {
         }
         this.handleFormChange = this.handleFormChange.bind(this)
         this.bodyEditHeight = document.getElementById("article-body").offsetHeight;
+        this.resizeTextArea = this.textarea.bind(this)
     }
 
     /**
@@ -27,7 +28,14 @@ class ArticleBodyEdit extends Component {
           this.setState({
              [field]: event.currentTarget.value
             //[field]: event.target.value
-          });
+          }, this.resizeTextArea);
+    }
+
+    /**
+     * Uses jquery to resize the height of the text area to fit the text as the user types.
+     */
+    resizeTextArea() {
+      const textArea = document.getElementById("body-edit");
     }
 
     render() {
@@ -60,6 +68,7 @@ class ArticleBodyEdit extends Component {
                     }}
                   >
                     <textarea
+                      id="body-edit"
                       type="textarea"
                       className="edit-body-textarea"
                       wrap="hard"
