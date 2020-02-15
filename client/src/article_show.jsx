@@ -27,7 +27,8 @@ class ArticleShow extends Component {
             editingTitle: false,
             confirmationOpen: false,
             titleTooltipOpen: false,
-            bodyTooltipOpen: false
+            bodyTooltipOpen: false,
+            deleteTooltipOpen: false
         }
         this.cancelEdit = this.cancelEdit.bind(this);
         this.finishEdit = this.finishEdit.bind(this);
@@ -102,7 +103,9 @@ class ArticleShow extends Component {
     /**
      * It's the render method.  It renders a Query component with all of our relevant data inside of it.
      * The Subscription element at the bottom of the component allows the article to automatically update when it is changed, reacted to, or commented on
-     * TODO: would love to change this into a functional component with React Hooks.
+     * TODOS
+     *    Change this into a functional component with React Hooks.
+     *    Add tags
      */
     render() {
        const argument = parseInt(this.props.match.params.articleID)
@@ -118,8 +121,15 @@ class ArticleShow extends Component {
                         <div className={`article-show-page article-show-page-${colorScheme}`}>
                             <div className="article-section">
                                 {currentUser && (article.author.id === currentUser.id) && 
-                                 <MdDelete className={`post-delete-btn ${colorScheme}`}  onClick={this.openModal} />}
-
+                                    <div className="delete-btn-container">
+                                      <MdDelete className={`post-delete-btn ${colorScheme}`}  
+                                        onClick={this.openModal} 
+                                        onMouseEnter={() => this.setState({ deleteTooltipOpen: true })}
+                                        onMouseLeave={() => this.setState({ deleteTooltipOpen: false })}
+                                      />
+                                      <Tooltip message="Delete Article" visibility={this.state.deleteTooltipOpen}/>               
+                                    </div>
+                }
                                 {!this.state.editingTitle ? 
                                  <h1 className="article-show-title">
                                  
@@ -135,7 +145,7 @@ class ArticleShow extends Component {
                                                 onMouseEnter={() => this.setState({titleTooltipOpen: true})}
                                                 onMouseLeave={() => this.setState({ titleTooltipOpen: false })}
                                                 />
-                                                <Tooltip message={"Edit article title"} visibility={this.state.titleTooltipOpen}/>
+                                                <Tooltip message={"Edit title"} visibility={this.state.titleTooltipOpen}/>
                                         </div>
                                        
                                      }
@@ -148,8 +158,16 @@ class ArticleShow extends Component {
                                 {!this.state.editingBody ? 
                                   <p className="article-show-body" id="article-body">
                                         {currentUser && (article.author.id === currentUser.id) && 
-                                            <MdEdit className="post-edit-btn" onClick={this.editField} 
-                                        name="Body" id="Body" />}
+                                            <div className="edit-btn-container">
+                                                <MdEdit className="post-edit-btn" 
+                                                onClick={this.editField} 
+                                                name="Body"
+                                                id="Body" 
+                                                onMouseEnter={() => this.setState({ bodyTooltipOpen: true })}
+                                                onMouseLeave={() => this.setState({ bodyTooltipOpen: false })}
+                                                />
+                                            <Tooltip message={"Edit body"} visibility={this.state.bodyTooltipOpen} />
+                                            </div>}
                                     {article.body} 
                                   </p> 
                                    : 
