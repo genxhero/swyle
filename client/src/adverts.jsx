@@ -8,7 +8,6 @@ import React from 'react';
  */
 
 const Adverts = (props) => {
-    console.log(props)
     return (
         <div className="adverts-page">
             <div className="adverts-greeting">             
