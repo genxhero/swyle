@@ -4,13 +4,14 @@
     background: rgba(24, 139, 253, 1);
     position: absolute;
     font-size: small;
-    right: -7rem;
+    right: -6.5rem;
     padding: .2rem;
-    padding-top: .15rem;
-    padding-bottom: .3rem;
     padding-right: .5rem;
     margin: .2rem;
-    min-width: fit-content;
+    text-align: center;
+    font-weight: bold;
+    // min-width: fit-content;
+    min-width: 6rem;
     display: inline-block;
     border-radius: 4px;
     &.hidden {
@@ -27,6 +28,6 @@
   border-bottom: 10px solid transparent; 
   border-right:10px solid rgba(24, 139, 253, 1); 
   position: absolute;
-  left: -.6rem;
+  left: -6px;
 }
 
