@@ -80,7 +80,7 @@ class ArticleShow extends Component {
      */
     editField(event) {
         event.preventDefault();
-        this.setState({ [`editing${event.target.id}`]: true });
+        this.setState({ [`editing${event.target.id}`]: true, titleTooltipOpen: false, bodyTooltipOpen: false});
     }
 
     /**
