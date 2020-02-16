@@ -16,7 +16,7 @@ class ArticleBodyEdit extends Component {
         }
         this.handleFormChange = this.handleFormChange.bind(this)
         this.bodyEditHeight = document.getElementById("article-body").offsetHeight;
-        this.resizeTextArea = this.textarea.bind(this)
+        this.resizeTextArea = this.resizeTextArea.bind(this)
     }
 
     /**
