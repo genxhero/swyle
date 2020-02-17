@@ -162,6 +162,10 @@ Ruby on Rails, GraphQL, Apollo Server, React, Node, Webpack, AWS.  Rails Action 
 
 # Future
 
+## Known Issues
+
+Heroku's Redis plugin is somewhat tempermental at the moment - as such websockets will occasionally fail during the handshake.
+
 ## New Features
 
 ### Tags
