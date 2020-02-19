@@ -17,7 +17,6 @@ class UserDash extends Component {
         this.selectTab = this.selectTab.bind(this)
     }
 
-    //TODO: Change up the Hooks and make this component functional to appease the snobs.
   componentWillReceiveProps(newProps) {
       if (this.props.currentUser !== newProps.currentUser) {
           this.setState({currentUser: newProps.currentUser})
