@@ -1,6 +1,9 @@
 import React from 'react';
 
 /**
+ * 
+ * A right-floating tooltip with a left arrow
+ * 
  * Expected Props:
  *    message: String, text to be displayed.
  *    visibility: Boolean, whether the component can be seen.
