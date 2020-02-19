@@ -1,5 +1,9 @@
 import React from 'react';
 
+/**
+ * Floating error tooltip for auth forms. 
+ */
+
 const InlineError = props => {
     const {message, visible} = props;
     return (
