@@ -35,10 +35,9 @@ class GraphqlChannel < ApplicationCable::Channel
 
   def context
     id = current_user ? current_user.id : 1
-     puts context[:current_user]
     {
       current_user_id: id,
-      current_user: context[:current_user],
+      current_user: current_user,
       channel: self
     }
   end
