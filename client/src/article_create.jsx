@@ -1,5 +1,7 @@
 /** 
  * Renders form for creating a new article
+ * 
+ * TODO: Assess whether i need the current user query here as i may be able to pass current user in from props
  */
 
 import React, { Component } from 'react';
