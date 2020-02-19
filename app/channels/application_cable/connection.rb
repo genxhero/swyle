@@ -10,7 +10,6 @@ module ApplicationCable
 
     def current_user       
       user = User.find_by(id: cookies.signed[:user_id])
-      puts "THE USER - #{user}" 
       user 
     end
 
