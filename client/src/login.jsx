@@ -26,7 +26,6 @@ class Login extends Component {
             emailValid: null,
             errors: null
         }
-        // This format is far, far easier to debug than using the arrow methods.
         this.handleFormChange = this.handleFormChange.bind(this);
         this.clearErrors = this.clearErrors.bind(this);
         this.demoLogin = this.demoLogin.bind(this);
