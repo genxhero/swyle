@@ -36,6 +36,7 @@ class ArticleBodyEdit extends Component {
      */
     resizeTextArea() {
       const textArea = document.getElementById("body-edit");
+      debugger;
     }
 
     render() {
