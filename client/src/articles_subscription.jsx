@@ -13,6 +13,7 @@ const Subscription = ({ subscribeToMore }) => {
       updateQuery: (prev, { subscriptionData }) => {
         if (!subscriptionData.data) return prev;
         const { articleAdded } = subscriptionData.data;
+        console.log("Added:", articleAdded)
         if (articleAdded) {
           const alreadyInList = prev.articles.find(e => e.id === articleAdded.id);
           if (alreadyInList) {
