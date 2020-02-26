@@ -13,7 +13,7 @@ module Types
     field :likeCount, Integer, null: false
     field :reactions, [GraphQL::Types::JSON], null: true
     def article(argument)
-     Article.find(argument[:id])
+     Article.find(argument[:id]).eager_load(:likes, :smarts, :funnies, :spicies)
     end
 
     field :image, ImageType, null: false do
