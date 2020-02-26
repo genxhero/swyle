@@ -8,6 +8,7 @@ module Types
     field :article, ArticleType, null: false do
       argument :id, Int, required: true
     end
+    #might not need these two fields any more 
     field :count, Integer, null: false
     field :likeCount, Integer, null: false
     field :reactions, [GraphQL::Types::JSON], null: true
