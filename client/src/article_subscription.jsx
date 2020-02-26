@@ -12,11 +12,12 @@ const Subscription = ({ subscribeToMore }) => {
         return subscribeToMore({
             document: ArticleSubscription,
             updateQuery: (prev, { subscriptionData }) => {
-                console.log("")
+                console.log("Before subscription data's existence is being checked")
                 if (!subscriptionData.data) {
                     console.log("NO SUBSCRIPTION DATA")
                     return prev;
                 }
+
                 console.log("THE DATA:", subscriptionData)
                
                 // const { articleLiked } = subscriptionData.data;
@@ -34,7 +35,6 @@ const Subscription = ({ subscribeToMore }) => {
                 // }
 
                 const { articleUpdated } = subscriptionData.data;
-                
                 if (articleUpdated) {
                     return {
                         article: articleUpdated
