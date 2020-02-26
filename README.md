@@ -181,6 +181,7 @@ I hope to implement video uploads, or at least embedding.
 *  Change the -colorScheme to .colorScheme everywhere in the scss files and jsx elemental classNames
 *  Create a reusable component to be used across the index, trending, and recent user posts. 
 *  Implement rich text and formatting for articles.
+*  Eager fetch reactions
 
 # Bugs Overcome
 *  Leaving the title edit component open and then navigating by way of the next / prev link will cause the mutation to apply to the image newly loaded regardless of owner. Expected behavior: it should close the edit components out. I solved this by entering logic in componentDidUpdate - should the paramaters change the component's state will update so that editingTitle and editingDescription are both false, thereby closing the editors.
