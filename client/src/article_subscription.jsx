@@ -9,6 +9,7 @@ import ArticleSubscription from './subscriptions/article_show';
 
 const Subscription = ({ subscribeToMore }) => {
     useEffect(() => {
+        
         return subscribeToMore({
             document: ArticleSubscription,
             updateQuery: (prev, { subscriptionData }) => {
