@@ -22,7 +22,7 @@ const getCableUrl =  () => {
         // console.log(`${protocol}//${host}:${port}/cable?token=${authToken}`)
         return `${protocol}//${host}:${port}/cable?token=${authToken}`;
     } else {
-        return `ws://afternoon-eyrie-69554.herokuapp.com/cable?token=${authToken}`;
+        return `${protocol}//afternoon-eyrie-69554.herokuapp.com/cable?token=${authToken}`;
     }
 };
 
