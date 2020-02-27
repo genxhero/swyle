@@ -20,8 +20,10 @@ const getCableUrl =  () => {
     const authToken =  localStorage.getItem('mlToken') || 'loggedouttoken';
     if (process.env.NODE_ENV === 'development') {
         // console.log(`${protocol}//${host}:${port}/cable?token=${authToken}`)
+        console.log("Cable Url:", `${protocol}//${host}:${port}/cable?token=${authToken}`)
         return `${protocol}//${host}:${port}/cable?token=${authToken}`;
     } else {
+        console.log("Cable Url:", `${protocol}//afternoon-eyrie-69554.herokuapp.com/cable?token=${authToken}`)
         return `${protocol}//afternoon-eyrie-69554.herokuapp.com/cable?token=${authToken}`;
     }
 };
