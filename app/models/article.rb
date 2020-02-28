@@ -1,7 +1,7 @@
 # An article is a text composition which may be several paragraphs in length.
 # Users may comment on an article and react in various ways.
 
-
+#TODO: Implement eager loading / join so that reactions are grabbed in a single query
 class Article  < ApplicationRecord
     validates :body, :title, presence: true
 
