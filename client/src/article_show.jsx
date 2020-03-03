@@ -17,6 +17,7 @@ import ConfirmationModal from './confirmation_modal';
 import Subscription from './article_subscription';
 import Reaction from './reaction';
 import Tooltip from './tooltip';
+import ReactMarkdown from 'react-markdown'
 
 class ArticleShow extends Component {
 
