@@ -169,7 +169,7 @@ class ArticleShow extends Component {
                                                 />
                                             <Tooltip message={"Edit body"} visibility={this.state.bodyTooltipOpen} />
                                             </div>}
-                                    {article.body} 
+                                        <ReactMarkdown source={article.body} />
                                   </p> 
                                    : 
                                   <ArticleBodyEdit cancelEdit={this.cancelEdit} finishEdit={this.finishEdit} id={article.id} body={article.body}/> }
