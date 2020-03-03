@@ -1,4 +1,6 @@
 #An image post is what you might imagine - someone posts an image with a description and it gets
+#TODO: make like count merely an integer for scaling reason
+
 class ImagePost  < ApplicationRecord
 
     validates :title, presence: true
