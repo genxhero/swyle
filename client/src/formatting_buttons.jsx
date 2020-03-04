@@ -18,8 +18,8 @@ const FormattingButtons = props => {
     }
 
     return (
-        <div>
-            <button name="B" onClick={boldTag} />
+        <div className="formatting-section">
+            <button className="formatting-button" name="B" onClick={boldTag} />
         </div>
     )
 }

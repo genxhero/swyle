@@ -59,7 +59,6 @@ class ArticleCreate extends Component {
                     <input className={`article-create-title ${this.props.colorScheme || 'classic'}`} type="text" onChange={this.handleFormChange("title")}  value={this.state.title} />
                     <span className="post-creation-label">Article Body - <a href="https://www.markdownguide.org/basic-syntax">Markdown</a> Now Supported</span>
                     <FormattingButtons elementId={"new-article-text"} updateState={ (val) => {
-                        debugger;
                         this.setState({body: val})
                     }}/>
                     <textarea id="new-article-text" className={`article-create-body ${this.props.colorScheme || 'classic'}`} type="text" onChange={this.handleFormChange("body")} value={this.state.description} />
