@@ -1,6 +1,10 @@
 import React from 'react'
 import $ from 'jquery';
 
+/**
+ * 
+ * Only finds the first instance. Hm. Gonna need to find the index of the substring I reckon.
+ */
 const FormattingButtons = props => {
     const boldTag = (e) => {
         e.preventDefault();
