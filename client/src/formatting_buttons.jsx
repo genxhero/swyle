@@ -14,6 +14,7 @@ const FormattingButtons = props => {
          const input = document.getElementById(props.elementId);
          const text = input.value;
          input.value = text.replace(selection, `**${selection}**`);
+         props.updateState(text.replace(selection, `**${selection}**`))
     }
 
     return (
