@@ -41,12 +41,26 @@ const FormattingButtons = props => {
 
     const tagWrap = (e) => {
         e.preventDefault();
+        const input = document.getElementById(props.elementId);
+        const text = input.value;
+        const start = input.selectionStart;
+        const finish = input.selectionEnd;
+        const sel = text.substring(start, finish);
+        const tag = e.target.getAttribute("name");
+          const newText =
+            text.substring(0, start) +
+            tag +
+            sel +
+            tag +
+            text.substring(finish, text.length);
+          input.value = newText;
+          props.updateState(newText);
     }
 
     return (
         <div className="formatting-section">
-            <button className="formatting-button" value="B" name="B" onClick={boldTag}>B</button>
-            <button className="formatting-button" value="I" name="I" onClick={italicTag}>I</button>
+            <button className="formatting-button" value="B" name="**" onClick={tagWrap}>B</button>
+            <button className="formatting-button" value="I" name="*" onClick={tagWrap}>I</button>
         </div>
     )
 }
