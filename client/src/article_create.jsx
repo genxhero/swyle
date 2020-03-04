@@ -57,7 +57,7 @@ class ArticleCreate extends Component {
                     <span className="post-creation-label">Article Title</span>
                     <input className={`article-create-title ${this.props.colorScheme || 'classic'}`} type="text" onChange={this.handleFormChange("title")}  value={this.state.title} />
                     <span className="post-creation-label">Article Body - <a href="https://www.markdownguide.org/basic-syntax">Markdown</a> Now Supported</span>
-                    <FormattingButtons />
+                    <FormattingButtons applyFormat={this.handleFormChange}/>
                     <textarea className={`article-create-body ${this.props.colorScheme || 'classic'}`} type="text" onChange={this.handleFormChange("body")} value={this.state.description} />
                     <input type="submit" className={`submit ${this.props.colorScheme}`} value="Post Article" disabled={!this.state.body} />
                 </form>
