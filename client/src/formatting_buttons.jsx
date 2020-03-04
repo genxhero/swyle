@@ -2,11 +2,13 @@ import React from 'react'
 import $ from 'jquery';
 
 const FormattingButtons = props => {
-    const  textArea = document.getElementById(props.elementId);
     const boldTag = (e) => {
         e.preventDefault();
          let selection = (document.all) ? document.selection.createRange().text : document.getSelection().toString();
-        // debugger;
+         const text = document.getElementById(props.elementId).value;
+         text.value = text.value.replace(selection, `**${selection}**`);
+
+         debugger;
     }
 
     return (
