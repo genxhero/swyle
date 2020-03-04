@@ -5,9 +5,9 @@ const FormattingButtons = props => {
     const boldTag = (e) => {
         e.preventDefault();
          let selection = (document.all) ? document.selection.createRange().text : document.getSelection().toString();
-         const text = document.getElementById(props.elementId).value;
-         debugger;
-         text.value = text.value.replace(selection, `**${selection}**`);
+        const input = document.getElementById(props.elementId);
+         const text = input.value;
+         input.value = text.replace(selection, `**${selection}**`);
     }
 
     return (
