@@ -11,7 +11,7 @@ const FormattingButtons = props => {
 
     const boldTag = (e) => {
          e.preventDefault();
-         let selection = (document.all) ? document.selection.createRange().text : document.getSelection().toString();
+        //  let selection = (document.all) ? document.selection.createRange().text : document.getSelection().toString();
          const input = document.getElementById(props.elementId);
          const text = input.value;
          const start = input.selectionStart;
@@ -24,7 +24,7 @@ const FormattingButtons = props => {
 
     const italicTag = (e) => {
         e.preventDefault();
-        let selection = (document.all) ? document.selection.createRange().text : document.getSelection().toString();
+        // let selection = (document.all) ? document.selection.createRange().text : document.getSelection().toString();
         const input = document.getElementById(props.elementId);
         const text = input.value;
         const start = input.selectionStart;
