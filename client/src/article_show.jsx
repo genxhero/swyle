@@ -157,7 +157,7 @@ class ArticleShow extends Component {
                                     }
                                  <h3>by {article.author.username}</h3>
                                 {!this.state.editingBody ? 
-                                  <p className="article-show-body" id="article-body">
+                                  <div className="article-show-body" id="article-body">
                                         {currentUser && (article.author.id === currentUser.id) && 
                                             <div className="edit-btn-container">
                                                 <MdEdit className="post-edit-btn" 
@@ -170,7 +170,7 @@ class ArticleShow extends Component {
                                             <Tooltip message={"Edit body"} visibility={this.state.bodyTooltipOpen} />
                                             </div>}
                                         <ReactMarkdown source={article.body} />
-                                  </p> 
+                                  </div> 
                                    : 
                                   <ArticleBodyEdit cancelEdit={this.cancelEdit} finishEdit={this.finishEdit} id={article.id} body={article.body}/> }
                           

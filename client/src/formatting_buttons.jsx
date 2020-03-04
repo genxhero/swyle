@@ -10,7 +10,7 @@ const FormattingButtons = props => {
 
     return (
         <div>
-            <button name="Bold" onClick={boldTag} />
+            <button name="B" onClick={boldTag} />
         </div>
     )
 }
