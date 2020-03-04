@@ -17,14 +17,9 @@ const FormattingButtons = props => {
         const finish = input.selectionEnd;
         const sel = text.substring(start, finish);
         const tag = e.target.getAttribute("name");
-          const newText =
-            text.substring(0, start) +
-            tag +
-            sel +
-            tag +
-            text.substring(finish, text.length);
-          input.value = newText;
-          props.updateState(newText);
+        const newText = text.substring(0, start) + tag + sel + tag + text.substring(finish, text.length);
+        input.value = newText;
+        props.updateState(newText);
     }
 
     return (
