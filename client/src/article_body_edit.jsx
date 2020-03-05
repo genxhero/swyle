@@ -35,7 +35,7 @@ class ArticleBodyEdit extends Component {
      * Uses jquery to resize the height of the text area to fit the text as the user types.
      */
     resizeTextArea() {
-      const textArea = document.getElementById("body-edit");
+      // const textArea = document.getElementById("body-edit");
       debugger;
     }
 
