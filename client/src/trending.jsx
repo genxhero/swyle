@@ -2,7 +2,7 @@
 import React, {Component} from 'react';
 import {graphql} from 'react-apollo';
 import query from './queries/posts_by_popularity';
-import { parseUrl} from './helpers';
+// import { parseUrl} from './helpers';
 import PostCard from './post_card';
 
 /**
