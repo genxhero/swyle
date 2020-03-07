@@ -51,7 +51,6 @@ class ArticleCreate extends Component {
         if (!this.props.data.currentUser) {
             return <Redirect to="/login" />
         }
-        // console.log(this.state)
         return (
             <div className={`article-create-page ${this.props.colorScheme || 'classic'}`}>
                 <form className={`article-create-form ${this.props.colorScheme || 'classic'}`} onSubmit={this.save}>

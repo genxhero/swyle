@@ -27,7 +27,6 @@ class ArticleBodyEdit extends Component {
         return event =>
           this.setState({
              [field]: event.currentTarget.value
-            //[field]: event.target.value
           }, this.resizeTextArea);
     }
 
