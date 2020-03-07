@@ -182,6 +182,7 @@ I hope to implement video uploads, or at least embedding.
 *  Create a reusable component to be used across the index, trending, and recent user posts. 
 *  Implement rich text and formatting for articles.
 *  Eager fetch reactions
+*  Make openModal() and closeModal() accept a state setter as a callback, put in utils file as export.
 
 # Bugs Overcome
 *  Leaving the title edit component open and then navigating by way of the next / prev link will cause the mutation to apply to the image newly loaded regardless of owner. Expected behavior: it should close the edit components out. I solved this by entering logic in componentDidUpdate - should the paramaters change the component's state will update so that editingTitle and editingDescription are both false, thereby closing the editors.
