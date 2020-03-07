@@ -4,6 +4,8 @@ import React from 'react';
  * A space for commercials where sponsors can roam free.
  * Ads should be amusing, never annoying.
  * Ads can be liked and commented on the same as articles.
+ * 
+ * TODO: Get adverts from the database using the useQuery Hook
  * @param {} props 
  */
 
