@@ -126,7 +126,7 @@ class ArticleShow extends Component {
                                 {currentUser && (article.author.id === currentUser.id) && 
                                     <div className="delete-btn-container">
                                       <MdDelete className={`post-delete-btn ${colorScheme}`}  
-                                        onClick={this.newOpenModal(() => this.setState({confirmationOpen: true}))} 
+                                        onClick={() => newOpenModal(() => this.setState({confirmationOpen: true}))} 
                                         onMouseEnter={() => this.setState({ deleteTooltipOpen: true })}
                                         onMouseLeave={() => this.setState({ deleteTooltipOpen: false })}
                                       />
@@ -200,7 +200,7 @@ class ArticleShow extends Component {
                             </div>
 
                               <CommentSection postType={"Article"} currentUser={currentUser} colorScheme={colorScheme}postId={argument} articleAuthorId={article.author.id} comments={article.comments}/>
-                            {this.state.confirmationOpen && <ConfirmationModal title={article.title} cancel={this.closeModal} confirm={this.deleteArticle}/>}
+                            {this.state.confirmationOpen && <ConfirmationModal title={article.title} cancel={newCloseModal(() => this.setState({ confirmationOpen: false }))} confirm={this.deleteArticle}/>}
                             <Subscription subscribeToMore={subscribeToMore} />
                         </div>
                     )
