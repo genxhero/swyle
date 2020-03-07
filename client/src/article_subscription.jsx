@@ -21,19 +21,7 @@ const Subscription = ({ subscribeToMore }) => {
 
                 console.log("THE DATA:", subscriptionData)
                
-                // const { articleLiked } = subscriptionData.data;
-
-                // if (articleLiked) {
-                //     return {
-                //         article: articleLiked
-                //     }
-                // }
-                // const { articleUnliked } = subscriptionData.data
-                // if (articleUnliked) {
-                //     return {
-                //         article: articleUnliked
-                //     }
-                // }
+   
 
                 const { articleUpdated } = subscriptionData.data;
                 if (articleUpdated) {
