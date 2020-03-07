@@ -1,7 +1,9 @@
 import React from 'react'
 /**
  * Information about the website, the project, the app.
- * @param {} props 
+ * Props
+ * 
+ * colorScheme: String
  */
 const About = (props) => {
     return (
