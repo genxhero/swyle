@@ -50,6 +50,7 @@ class ArticleShow extends Component {
     /**
      * Params: None
      * Used to open a dialog modal asking the user to confirm whether to delete an article.
+     * TODO: create a version which accepts a callback that can be imported from utils
      */
     openModal() {
         $('body').css('overflow', 'hidden');
