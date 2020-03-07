@@ -200,7 +200,7 @@ class ArticleShow extends Component {
                             </div>
 
                               <CommentSection postType={"Article"} currentUser={currentUser} colorScheme={colorScheme}postId={argument} articleAuthorId={article.author.id} comments={article.comments}/>
-                            {this.state.confirmationOpen && <ConfirmationModal title={article.title} cancel={newCloseModal(() => this.setState({ confirmationOpen: false }))} confirm={this.deleteArticle}/>}
+                            {this.state.confirmationOpen && <ConfirmationModal title={article.title} cancel={newCloseModal} callback={() => this.setState({ confirmationOpen: false })} confirm={this.deleteArticle}/>}
                             <Subscription subscribeToMore={subscribeToMore} />
                         </div>
                     )
