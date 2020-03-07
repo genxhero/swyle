@@ -6,7 +6,7 @@ export const newOpenModal = (callback) => {
     callback();
 }
 
-export const newOpenModal = (callback) => {
+export const newCloseModal = (callback) => {
     $('body').css('overflow', 'auto');
     callback();
 }

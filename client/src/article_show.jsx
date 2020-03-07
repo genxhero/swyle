@@ -17,7 +17,8 @@ import ConfirmationModal from './confirmation_modal';
 import Subscription from './article_subscription';
 import Reaction from './reaction';
 import Tooltip from './tooltip';
-import ReactMarkdown from 'react-markdown'
+import ReactMarkdown from 'react-markdown';
+import {newOpenModal, newCloseModal} from './utils/utilities';
 
 class ArticleShow extends Component {
 
@@ -125,7 +126,7 @@ class ArticleShow extends Component {
                                 {currentUser && (article.author.id === currentUser.id) && 
                                     <div className="delete-btn-container">
                                       <MdDelete className={`post-delete-btn ${colorScheme}`}  
-                                        onClick={this.openModal} 
+                                        onClick={this.newOpenModal(() => this.setState({confirmationOpen: true}))} 
                                         onMouseEnter={() => this.setState({ deleteTooltipOpen: true })}
                                         onMouseLeave={() => this.setState({ deleteTooltipOpen: false })}
                                       />
