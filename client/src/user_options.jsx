@@ -5,7 +5,7 @@ import currentUser from './queries/current_user';
 
 /**
  * Panel for selecting user preferences.
- *      mutate: Function, provided by graphql.
+ *      mutate: Function, provided by graphql.dgdg
  * Future: Split into ColorMenu and other menus when other options become available.
  */
 
