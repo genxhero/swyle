@@ -29,4 +29,9 @@ const FormattingButtons = props => {
         </div>
     )
 }
+
+FormattingButtons.proTypes = {
+    elementId: PropTypes.string
+}
+
 export default FormattingButtons;
