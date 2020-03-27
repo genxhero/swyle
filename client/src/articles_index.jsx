@@ -27,7 +27,7 @@ const ArticlesIndex = (props) => {
                         <div className={`article-index-page article-index-page-${colorScheme}`}>
                             <h1>Newest Articles</h1>
                             {articles.map((article) => (
-                                <ArticleCard article={article} date={data} colorScheme={colorScheme} />       
+                                <ArticleCard article={article} date={date} colorScheme={colorScheme} />       
                             ))}
                             <Subscription subscribeToMore={subscribeToMore} />
                         </div>
