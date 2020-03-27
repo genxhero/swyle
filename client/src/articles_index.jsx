@@ -1,7 +1,6 @@
 import React from 'react';
 import articles from './queries/articles';
 import { Query } from "react-apollo";
-// import ArticleTags from './article_tags';
 import Subscription from './articles_subscription';
 import ArticleCard from './article_card';
 
@@ -38,16 +37,3 @@ const ArticlesIndex = (props) => {
 }
 
 export default ArticlesIndex;
-
-//                                     
-
-/**   <div className={`article-index-card ${colorScheme}`} key={`${article.id}${article.title}${date}`}>
-                                  <Link className={`article-index-show-link ${colorScheme}`} to={`/articles/${article.id}`}>
-                                     <h2 className="article-index-title">{article.title}</h2>
-                                     <h3 className="article-index-subtitle">by {article.author.username}</h3>
-                                     <p className="article-index-snippet">{article.snippet}{"..."}</p>
-                                     <ArticleTags tags={["lookAtThisTag", "othertag"]} />
-                                     <h4>{article.count} Commented {article.likeCount} Liked</h4>
-                                  </Link>
-
-                                </div> */
