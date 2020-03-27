@@ -35,8 +35,7 @@ const ArticlesIndex = (props) => {
                                      <ArticleTags tags={["lookAtThisTag", "othertag"]} />
                                      <h4>{article.count} Commented {article.likeCount} Liked</h4>
                                   </Link>
-                                 
-                             
+                        
                                 </div>
                               
                                
