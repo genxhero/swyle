@@ -1,7 +1,6 @@
 import React from 'react';
 import articles from './queries/articles';
 import { Query } from "react-apollo";
-import {Link} from 'react-router-dom';
 // import ArticleTags from './article_tags';
 import Subscription from './articles_subscription';
 import ArticleCard from './article_card';

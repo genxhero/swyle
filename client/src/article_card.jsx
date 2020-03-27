@@ -1,6 +1,8 @@
 import React from 'react';
 import ArticleTags from './article_tags';
 import ReactMarkdown from 'react-markdown';
+import { Link } from 'react-router-dom';
+
 
 const ArticleCard = props => {
     const {date, colorScheme, article } = props;
