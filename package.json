@@ -25,7 +25,7 @@
     "react_ujs": "^2.6.0",
     "turbolinks": "^5.2.0",
     "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.12"
   },
   "engines": {
     "npm": "6.11.2",
