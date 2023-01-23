@@ -31,6 +31,6 @@ services:
         value: swyle-prod
       - key: SKIP_PREFLIGHT_CHECK # Imported from Heroku app
         value: true
-        key: REDIS_URL
+      - key: REDIS_URL
         value: redis://red-cf7dv3kgqg47vk2mgg50:6379
 
