@@ -24,10 +24,10 @@ default: &default
 development:
   adapter: postgresql
   encoding: unicode
-  database: swyle_development
+  database: swyle_dev
   pool: 5
-  username: "swyle"
-  password: "swyleswyle"
+  username: "postgres"
+  password: "elephant"
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
