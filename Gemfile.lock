@@ -1,4 +1,12 @@
 GIT
+  remote: https://github.com/faker-ruby/faker.git
+  revision: 1c868b22beeb164962c955c4a81c98b000e3ec71
+  branch: main
+  specs:
+    faker (3.1.0)
+      i18n (>= 1.8.11, < 2)
+
+GIT
   remote: https://github.com/mimemagicrb/mimemagic.git
   revision: 01f92d86d15d85cfd0f20dabd025dcbd36a8a60f
   ref: 01f92d86d15d85cfd0f20dabd025dcbd36a8a60f
@@ -66,8 +74,8 @@ GEM
     autoprefixer-rails (10.4.7.0)
       execjs (~> 2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.699.0)
-    aws-sdk-core (3.169.0)
+    aws-partitions (1.700.0)
+    aws-sdk-core (3.170.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
       aws-sigv4 (~> 1.5)
@@ -83,7 +91,7 @@ GEM
       aws-eventstream (~> 1, >= 1.0.2)
     bcrypt (3.1.18)
     bindex (0.8.1)
-    bootsnap (1.15.0)
+    bootsnap (1.16.0)
       msgpack (~> 1.2)
     bootstrap-sass (3.4.1)
       autoprefixer-rails (>= 5.2.1)
@@ -96,27 +104,17 @@ GEM
     crass (1.0.6)
     date (3.3.3)
     dotenv (2.8.1)
-    em-proxy (0.1.9)
-      eventmachine
     erubi (1.12.0)
-    eventmachine (1.2.7)
     execjs (2.8.1)
-    faker (1.4.3)
-      i18n (~> 0.5)
     ffi (1.15.5)
     foreman (0.87.2)
-    globalid (1.0.1)
+    globalid (1.1.0)
       activesupport (>= 5.0)
     graphiql-rails (1.5.0)
       railties
       sprockets-rails
     graphql (1.13.18)
-    heroku-forward (0.4.0)
-      em-proxy (>= 0.1.8)
-      ffi
-      i18n (~> 0.6)
-      spoon (~> 0.0.1)
-    i18n (0.9.5)
+    i18n (1.8.11)
       concurrent-ruby (~> 1.0)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
@@ -163,7 +161,7 @@ GEM
       method_source (~> 1.0)
     pry-rails (0.3.9)
       pry (>= 0.10.4)
-    psych (2.0.17)
+    psych (2.2.4)
     puma (3.12.6)
     racc (1.6.2)
     rack (2.2.6.2)
@@ -205,7 +203,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.20.3, < 2.0)
     rake (13.0.6)
-    redis (3.1.0)
+    redis (4.8.0)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
     sassc (2.4.0)
@@ -221,8 +219,6 @@ GEM
       graphql (~> 1.5)
       search_object (~> 1.2)
     semantic_range (3.0.0)
-    spoon (0.0.6)
-      ffi
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -268,12 +264,11 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3)
   byebug
   dotenv
-  faker (~> 1.4.3)
+  faker!
   foreman
   graphiql-rails (= 1.5.0)
   graphql
-  heroku-forward
-  i18n (~> 0.6)
+  i18n (= 1.8.11)
   jbuilder (~> 2.7)
   jwt
   mimemagic!
@@ -285,7 +280,7 @@ DEPENDENCIES
   rack-cors
   rails (~> 6.0.0)
   rails_12factor
-  redis (~> 3.1.0)
+  redis (~> 4.0)
   sass-rails
   sassc-rails
   search_object (= 1.2.0)
@@ -299,4 +294,4 @@ RUBY VERSION
    ruby 3.2.0p0
 
 BUNDLED WITH
-   2.4.1
+   2.4.5
