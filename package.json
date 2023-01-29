@@ -27,7 +27,7 @@
     "turbolinks": "^5.2.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
-  },
+     },
   "engines": {
     "npm": "8.12.1",
     "node": "16.15.1",
