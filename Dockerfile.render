@@ -29,8 +29,7 @@ FROM ghcr.io/renderinc/heroku-app-builder:${HEROKU_STACK} AS builder
 #    ln -s /usr/bin/python2 /usr/bin/python
 
 # Continue with the rest of your Dockerfile...
-rm -rf node_modules
-npm install
+
 
 
 # The FROM statement above refers to an image with the base buildpacks already
