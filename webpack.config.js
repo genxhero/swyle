@@ -21,7 +21,19 @@ module.exports = {
                         presets: ['@babel/env', '@babel/react']
                     }
                 },
-            }
+            },
+            
+      {
+        test: /\.scss$/,
+        use: [
+          // Adds style to the DOM
+          'style-loader',
+          // Translates CSS into CommonJS
+          'css-loader',
+          // Compiles Sass to CSS
+          'sass-loader',
+        ],
+      }
         ]
     },
     devtool: 'source-map'
