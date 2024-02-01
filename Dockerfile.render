@@ -24,9 +24,9 @@ FROM ghcr.io/renderinc/heroku-app-builder:${HEROKU_STACK} AS builder
 # Install Python 2
 RUN apt-get update && \
     apt-get install -y python2 && \
-    ln -s /usr/bin/python2 /usr/bin/python && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* && \
+    ln -s /usr/bin/python2 /usr/bin/python
 
 # Continue with the rest of your Dockerfile...
 
