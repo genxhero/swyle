@@ -40,6 +40,7 @@
   "scripts": {
     "build": "npm install --prefix build",
     "deploy": "cp -a client/build/. public/",
-    "heroku-postbuild": "npm run build && npm run deploy"
+    "heroku-postbuild": "npm run build && npm run deploy",
+    "build-css": "sass input.scss output.css"
   }
 }
