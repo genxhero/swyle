@@ -21,8 +21,7 @@
   },
   "engines": {
     "npm": "8.12.1",
-    "node": "16.15.1",
-    "yarn": "1.15.2"
+    "node": "16.15.1"
   },
   "version": "0.1.0",
   "devDependencies": {
