@@ -1,6 +1,7 @@
 {
   "buildpacks": [
-    "heroku/nodejs"
+    "heroku/nodejs",
+    "heroku/ruby"
   ]
 
 }
