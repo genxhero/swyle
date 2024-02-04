@@ -21,17 +21,6 @@ FROM ghcr.io/renderinc/heroku-app-builder:${HEROKU_STACK} AS builder
 
 
 
-# Install Python 2
-RUN apt-get update && \
-    apt-get install -y python2 && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* && \
-    ln -s /usr/bin/python2 /usr/bin/python
-
-# Continue with the rest of your Dockerfile...
-
-
-
 # The FROM statement above refers to an image with the base buildpacks already
 # in place. We then run the apply-buildpacks.py script here because, unlike our
 # `v2` image, this allows us to expose build-time env vars to your app.
