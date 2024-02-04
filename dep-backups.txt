@@ -7,3 +7,6 @@ From root:
     "react-quill": "^1.3.3",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
+buildpacks
+ "heroku/nodejs",
+    "heroku/ruby"
