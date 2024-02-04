@@ -31,6 +31,6 @@
   "scripts": {
     "build": "npm install --prefix build",
     "deploy": "cp -a client/build/. public/",
-    "heroku-postbuild": "npm run build && npm run deploy"
+    "heroku-postbuild": "npm cache clean -f && npm run build && npm run deploy"
   }
 }
