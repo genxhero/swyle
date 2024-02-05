@@ -27,7 +27,7 @@
   "devDependencies": {
     "webpack-dev-server": "^3.9.0",
     "sass-loader": "^14.1.0",
-    "sass": "^1.70.0",
+    "sass": "^1.70.0"
   },
   "scripts": {
     "build": "npm install --prefix build",
