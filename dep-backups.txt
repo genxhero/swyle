@@ -10,3 +10,8 @@ From root:
 buildpacks
  "heroku/nodejs",
     "heroku/ruby"
+
+  "engines": {
+    "npm": "8.12.1",
+    "node": "16.13.1"
+  },
