@@ -22,7 +22,7 @@
   "devDependencies"" {
     "sass-loader": "^14.1.0",
     "sass": "^1.70.0",
-  }
+  },
   "engines": {
     "npm": "8.12.1",
     "node": "20.11.0"
