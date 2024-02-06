@@ -30,7 +30,7 @@
     "sass": "^1.70.0"
   },
   "scripts": {
-    "build": "npm install --prefix build",
+    "build": "npm install --prefix client",
     "deploy": "cp -a client/build/. public/",
     "heroku-postbuild": "npm cache clean -f && npm run build && npm run deploy"
   }
