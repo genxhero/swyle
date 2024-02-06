@@ -9,7 +9,7 @@
     "@rails/actioncable": "^6.0.1",
     "@rails/activestorage": "^6.0.1",
     "@rails/ujs": "^6.0.1",
-     @rails/webpacker": "^5.4.0",
+     "@rails/webpacker": "^5.4.0",
     "actioncable": "^5.2.3",
     "draft-js":"0.11.7",
     "graphql-ruby-client": "^1.6.6",
