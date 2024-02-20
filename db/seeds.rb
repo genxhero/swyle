@@ -9,13 +9,13 @@
 
 # User.destroy_all
 
-# 20.times do
-#     User.create(
-#         username:  "#{Faker::Name.first_name}",
-#         email: Faker::Internet.free_email,
-#         password: "demodemo"
-#     )
-# end
+ 20.times do
+     User.create(
+         username:  "#{Faker::Name.first_name}",
+         email: Faker::Internet.free_email,
+         password: "demodemo"
+     )
+ end
 
 ids= [];
 User.all.each do |user| 
@@ -35,16 +35,16 @@ end
 end
 
 
-# 50.times do
-#     title = "#{Faker::NatoPhoneticAlphabet.code_word} #{Faker::Company.profession}"
-#     description = Faker::Lorem.sentence(word_count: 12)
-#     ImagePost.create(
-#         title: title,
-#         description: description,
-#         user_id: ids.sample,
-#         image_url:  "https://picsum.photos/id/#{rand(500)}/500/"
-#     )
-# end
+ 50.times do
+     title = "#{Faker::NatoPhoneticAlphabet.code_word} #{Faker::Company.profession}"
+     description = Faker::Lorem.sentence(word_count: 12)
+     ImagePost.create(
+         title: title,
+         description: description,
+         user_id: ids.sample,
+         image_url:  "https://picsum.photos/id/#{rand(500)}/500/"
+     )
+ end
 
 article_ids = []
 Article.all.each do |article|
