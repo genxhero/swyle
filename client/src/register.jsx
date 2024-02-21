@@ -1,3 +1,152 @@
+import React, { useState, useEffect } from 'react';
+import { useQuery, useMutation } from '@apollo/client';
+import { Redirect } from 'react-router-dom';
+import gql from 'graphql-tag';
+import $ from 'jquery';
+import ErrorsModal from './errors_modal';
+import { validateEntry } from './helpers';
+import InlineError from './inline_error';
+
+const REGISTER_USER = gql`
+  mutation RegisterUser($email: String!, $username: String!, $password: String!) {
+    createUser(email: $email, username: $username, password: $password) {
+      token
+      user {
+        id
+        username
+        email
+      }
+      errors {
+        message
+      }
+    }
+  }
+`;
+
+const CURRENT_USER = gql`
+  query CurrentUser {
+    currentUser {
+      id
+      username
+      email
+    }
+  }
+`;
+
+const Register = ({ history }) => {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
+  const [usernameValid, setUsernameValid] = useState(null);
+  const [emailValid, setEmailValid] = useState(null);
+  const [passwordValid, setPasswordValid] = useState(null);
+  const [errors, setErrors] = useState(null);
+
+  const [registerUser, { loading }] = useMutation(REGISTER_USER, {
+    update(cache, { data: { createUser } }) {
+      // Update cache if needed
+    },
+    onError(error) {
+      setErrors(error.graphQLErrors);
+    }
+  });
+
+  const { data: currentUserData } = useQuery(CURRENT_USER);
+
+  useEffect(() => {
+    if (errors) {
+      $('body').css('overflow', 'hidden');
+    } else {
+      $('body').css('overflow', 'auto');
+    }
+  }, [errors]);
+
+  const passwordIsPassword = password.toLowerCase() === 'password';
+  const readyToSubmit =
+    passwordValid &&
+    usernameValid &&
+    emailValid &&
+    password === passwordConfirm &&
+    !passwordIsPassword;
+
+  const handleFormChange = (field) => (event) => {
+    const value = event.currentTarget.value;
+    switch (field) {
+      case 'username':
+        setUsername(value);
+        setUsernameValid(validateEntry(field, value));
+        break;
+      case 'email':
+        setEmail(value);
+        setEmailValid(validateEntry(field, value));
+        break;
+      case 'password':
+        setPassword(value);
+        setPasswordValid(validateEntry(field, value));
+        break;
+      case 'passwordConfirm':
+        setPasswordConfirm(value);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const clearErrors = () => {
+    setErrors(null);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    registerUser({ variables: { email, username, password } }).then((res) => {
+      const { token, errors: registerErrors } = res.data.createUser;
+      if (token) {
+        localStorage.setItem('mlToken', token);
+      }
+      if (registerErrors) {
+        setErrors(registerErrors);
+      } else {
+        history.push('/');
+      }
+    });
+  };
+
+  if (loading || !currentUserData) {
+    return <p>Loading...</p>;
+  }
+
+  if (!currentUserData.currentUser) {
+    return (
+      <div className="session-page">
+        <form onSubmit={handleSubmit} className="session-form">
+          <h1>Sign Up</h1>
+          <span className="session-form-label">Email</span>
+          <div className="session-form-input-wrapper">
+            <input
+              className={`auth-field ${emailValid === false ? 'invalid' : ''}`}
+              type="text"
+              value={email}
+              onChange={handleFormChange('email')}
+            />
+            <InlineError message={'Please enter a valid email address.'} visible={emailValid === false} />
+          </div>
+          {/* Repeat similar pattern for other fields */}
+          <div className="form-footer">
+            <input className={`submit ${readyToSubmit ? '' : 'disabled'}`} type="submit" name="Register" disabled={!readyToSubmit} />
+          </div>
+        </form>
+        {errors && <ErrorsModal errors={errors} clearErrors={clearErrors} />}
+      </div>
+    );
+  }
+
+  return <Redirect to="/" />;
+};
+
+export default Register;
+
+/**
 import React, {Component} from 'react';
 import {Redirect } from 'react-router-dom';
 import {Query, Mutation} from 'react-apollo';
@@ -8,9 +157,9 @@ import ErrorsModal from './errors_modal';
 import {validateEntry} from './helpers';
 import InlineError from './inline_error';
 
-/**
- * Form for creating a new user. 
- */
+
+//  Form for creating a new user. 
+
 class Register extends Component {
     constructor(props) {
         super(props) 
@@ -37,10 +186,9 @@ class Register extends Component {
         });
     }
 
-    /**
-     * Nifty trick for making one's error modals appear to cover the entire page when it's really
-     * just covering some visible portion.
-     */
+    
+ //    * Nifty trick for making one's error modals appear to cover the entire page when it's really just covering some visible portion.
+    
     allowOrPreventScrolling() {
         if (this.state.errors) {
             $('body').css('overflow', 'hidden');
@@ -146,3 +294,4 @@ class Register extends Component {
 }
 
 export default Register;
+*/
