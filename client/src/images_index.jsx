@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useQuery } from 'react-apollo';
+import { useQuery } from '@apollo/client';
 import images from './queries/images';
 import { Link } from 'react-router-dom';
 import Subscription from './images_subscription';
