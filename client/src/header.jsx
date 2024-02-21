@@ -1,3 +1,73 @@
+/**
+ * The app's main header.  Contains session (login, logout, register) buttons and search bar.
+ * Expected Props
+ *      currentUser: Object - the user currently in session.
+ */
+
+import React, { useState } from 'react';
+import NavBar from './navbar';
+import logout from './mutations/logout';
+import { useQuery, useMutation } from '@apollo/client';
+import currentUserQuery from './queries/current_user';
+import HeaderSearch from './header_search';
+import { Link } from 'react-router-dom';
+import { FaRegNewspaper, FaImage } from 'react-icons/fa';
+
+const Header = ({ colorScheme }) => {
+    const [currentUser, setCurrentUser] = useState(null);
+    const { data } = useQuery(currentUserQuery);
+    const [logoutMutation] = useMutation(logout);
+
+    // Update currentUser state when data changes
+    useState(() => {
+        if (data && data.currentUser) {
+            setCurrentUser(data.currentUser);
+        } else {
+            setCurrentUser(null);
+        }
+    }, [data]);
+
+    const handleLogout = async () => {
+        try {
+            await logoutMutation({
+                refetchQueries: [{ query: currentUserQuery }]
+            });
+            setCurrentUser(null);
+            localStorage.removeItem("mlToken");
+        } catch (error) {
+            console.error('Error logging out:', error);
+        }
+    };
+
+    return (
+        <div className={`header header-${colorScheme}`}>
+            <div className="header-top">
+                <div className="header-site-name" />
+                <HeaderSearch colorScheme={colorScheme} />
+                {!currentUser ? (
+                    <div className="header-session-buttons">
+                        <Link to="/login" className="header-login">Login</Link>
+                        <Link to="/register" className="header-register">Register</Link>
+                    </div>
+                ) : (
+                    <div className="header-personal-greeting">
+                        <h3>Hello, {currentUser.username || "nobody"} </h3>
+                        <button className={`header-login ${colorScheme}`} onClick={handleLogout}>Logout</button>
+                    </div>
+                )}
+                <div className="new-post-buttons">
+                    <Link className={`new-post-btn new-post-btn-${colorScheme}`} to="/images/new" style={{ "right": "0" }}><FaImage /></Link>
+                    <Link className={`new-post-btn new-post-btn-${colorScheme}`} to="/articles/new"><FaRegNewspaper /></Link>
+                </div>
+            </div>
+            <NavBar colorScheme={colorScheme} />
+        </div>
+    );
+};
+
+export default Header;
+
+/**
 import React, {Component} from 'react';
 import NavBar from './navbar';
 import logout from './mutations/logout';
@@ -6,12 +76,6 @@ import {graphql} from 'react-apollo';
 import currentUser from './queries/current_user';
 import HeaderSearch from './header_search';
 import { FaRegNewspaper, FaImage}from 'react-icons/fa';
-
-/**
- * The app's main header.  Contains session (login, logout, register) buttons and search bar.
- * Expected Props
- *      currentUser: Object - the user currently in session.
- */
 
 class Header extends Component {
     constructor(props) {
@@ -29,10 +93,9 @@ class Header extends Component {
         }
     }
 
-    /**
-     * Logs the user out, then resets the store.
-     * TODO: Figure out what is causing the invariant violation.
-     */
+//Logs the user out, then resets the store.
+//* TODO: Figure out what is causing the invariant violation.
+     
     logout () {
         this.props.mutate({ 
             refetchQueries: [{ query: currentUser }],
@@ -82,3 +145,4 @@ class Header extends Component {
 }
 
 export default graphql(logout)(Header);
+*/
