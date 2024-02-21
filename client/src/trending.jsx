@@ -1,4 +1,74 @@
 /* eslint no-restricted-globals: 0 */  // --> OFF
+
+import React, { useState } from 'react';
+import { useQuery } from '@apollo/client';
+import query from './queries/posts_by_popularity';
+import PostCard from './post_card';
+
+const Trending = ({ colorScheme }) => {
+    const [activePane, setActivePane] = useState("likes");
+
+    const { loading, data } = useQuery(query);
+
+    const selectPane = (event) => {
+        const selection = event.target.getAttribute('name');
+        setActivePane(selection);
+    };
+
+    const sortPosts = (attribute) => {
+        return data.postsByPopularity.sort((a, b) => {
+            const valA = a[attribute];
+            const valB = b[attribute];
+            return (valA < valB) ? -1 : (valA > valB) ? 1 : 0;
+        });
+    };
+
+    if (loading) {
+        return (
+            <div className={`loading-div loading-div-${colorScheme}`}>
+                <img className="loading-img" alt="load" src="https://i.gifer.com/origin/4d/4dc11d17f5292fd463a60aa2bbb41f6a_w200.gif" />
+            </div>
+        );
+    }
+
+    const attribute = activePane === 'comments' ? 'count' : 'likeCount';
+    const posts = sortPosts(attribute);
+
+    return (
+        <div className={`trending-posts-page trending-posts-page-${colorScheme}`}>
+            <h1 className={`trending-posts-title trending-posts-title-${colorScheme}`}>Most Popular Posts</h1>
+            <div className={`trending-posts-backpane ${colorScheme}`}>
+                <div className={`trending-posts-nav ${colorScheme}`}>
+                    <div
+                        className={`trending-posts-tab${activePane === 'likes' ? `-active ${colorScheme}` : `-inactive ${colorScheme}`}`}
+                        name="likes"
+                        onClick={selectPane}
+                    >
+                        By Likes
+                    </div>
+                    <div
+                        className={`trending-posts-tab${activePane === 'comments' ? `-active ${colorScheme}` : `-inactive ${colorScheme}`}`}
+                        name="comments"
+                        onClick={selectPane}
+                    >
+                        By Comments
+                    </div>
+                </div>
+                <div className={`trending-posts-content ${colorScheme}`}>
+                    {posts.map(post => (
+                        <PostCard colorScheme={colorScheme} post={post} key={post.title + post.id} />
+                    ))}
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Trending;
+
+
+//old code below
+/**
 import React, {Component} from 'react';
 import {graphql} from 'react-apollo';
 import query from './queries/posts_by_popularity';
@@ -9,6 +79,7 @@ import PostCard from './post_card';
  * The trending page allows users to sort posts by Likes and by number of Comments. No insane analytics, just the goods fair and plain.
  * The single responsibility of this component is "display a sorted list of posts based on user choices"
  */
+/**
 class Trending extends Component {
 
     constructor(props) {
@@ -27,11 +98,11 @@ class Trending extends Component {
         this.setState({activePane: selection})
     }
 
-    /**
-     * Sorts posts based on a specific attribute such as comment count or number of likes.
-     * Yes, it does it on the front end, and I'm not sorry.
-     * @param {string} attribute 
-     */
+    
+     // Sorts posts based on a specific attribute such as comment count or number of likes.
+     // Yes, it does it on the front end, and I'm not sorry.
+     // @param {string} attribute 
+     
     sortPosts(attribute) {
        const posts = this.props.data.postsByPopularity.sort((b, a) => {
            let valA = a[attribute];
@@ -87,6 +158,7 @@ class Trending extends Component {
 }
 
 export default graphql(query)(Trending);
+*/
 
 /**
  * <div className={`user-posts-card user-posts-card-${colorScheme}`} key={`${post.title}${post.id}`}>
