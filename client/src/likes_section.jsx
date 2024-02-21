@@ -1,3 +1,85 @@
+import React, { useState } from 'react';
+import { MdThumbUp } from 'react-icons/md';
+import { useMutation } from '@apollo/client';
+import likePost from './mutations/like_post';
+import unlikePost from './mutations/unlike_post';
+
+const LikesSection = (props) => {
+    const [currentUser, setCurrentUser] = useState(props.currentUser);
+    
+    const handleLikePost = (postId, postType) => {
+        if (!currentUser) {
+            alert("Must be logged in to like");
+            return;
+        }
+        
+        likePostMutation({
+            variables: {
+                userId: currentUser.id,
+                postId: postId,
+                postType: postType
+            }
+        }).then(res => {
+            // Handle success if needed
+        });
+    };
+
+    const handleUnlikePost = (postId, postType) => {
+        if (!currentUser) {
+            return;
+        }
+        
+        unlikePostMutation({
+            variables: {
+                userId: currentUser.id,
+                postId: postId,
+                postType: postType
+            }
+        }).then(res => {
+            // Handle success if needed
+        });
+    };
+
+    const [likePostMutation, { loading: likeLoading }] = useMutation(likePost, {
+        refetchQueries: [{ query: props.QUERIES[props.type], variables: { id: props.postId } }]
+    });
+
+    const [unlikePostMutation, { loading: unlikeLoading }] = useMutation(unlikePost, {
+        refetchQueries: [{ query: props.QUERIES[props.type], variables: { id: props.postId } }]
+    });
+
+    const userLikesIt = currentUser && props.likers.includes(currentUser.id);
+
+    return (
+        <div className="likes-section" style={{ "color": "white" }}>
+            <div className="like-or-dislike">
+                {userLikesIt ?
+                    <span>
+                        <MdThumbUp
+                            className="like-thumb-yes"
+                            onClick={() => handleUnlikePost(props.postId, props.type)}
+                        />
+                        {props.numLikes}
+                    </span>
+                    :
+                    <span>
+                        <MdThumbUp
+                            className="like-thumb-no"
+                            onClick={() => handleLikePost(props.postId, props.type)}
+                        />
+                        {props.numLikes}
+                    </span>
+                }
+            </div>
+        </div>
+    );
+};
+
+export default LikesSection;
+
+
+//old code below
+/**
 import React, {Component} from 'react';
 import { MdThumbUp} from 'react-icons/md';
 import {Mutation} from 'react-apollo';
@@ -8,9 +90,9 @@ import unlikePost from './mutations/unlike_post';
 
 const QUERIES = {"Article": article, "ImagePost": image};
 
-/**
- * To Be Deprecated for a Reactions Section once it is completed.
- */
+
+ //To Be Deprecated for a Reactions Section once it is completed.
+ 
 
 class LikesSection extends Component {
 
@@ -109,3 +191,5 @@ class LikesSection extends Component {
 }
 
 export default LikesSection;
+
+*/
