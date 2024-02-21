@@ -1,13 +1,50 @@
+import React, { useState } from 'react';
+import { useMutation, gql } from '@apollo/client';
+import { currentUser } from './queries/current_user';
+
+const UPDATE_USER_COLOR_SCHEME = gql`
+  mutation UpdateUserColorScheme($id: ID!, $colorScheme: String!) {
+    updateUserColorScheme(id: $id, colorScheme: $colorScheme) {
+      colorScheme
+    }
+  }
+`;
+
+const UserOptions = ({ colorScheme, userId }) => {
+  const [updateUserColorScheme] = useMutation(UPDATE_USER_COLOR_SCHEME, {
+    refetchQueries: [{ query: currentUser }],
+  });
+
+  const handleClick = (colorScheme) => {
+    updateUserColorScheme({
+      variables: { id: userId, colorScheme },
+    }).then((res) => {
+      // Handle response if needed
+    });
+  };
+
+  return (
+    <div className={`user-options user-options-${colorScheme}`}>
+      <div className={`user-option user-option-${colorScheme}`}>
+        <h4>Color Scheme</h4>
+        <div onClick={() => handleClick("standard")} className={colorScheme === "standard" ? "option option-selected" : "option option-unselected"}>Classic</div>
+        <div onClick={() => handleClick("red")} className={colorScheme === "red" ? "option option-selected" : "option option-unselected"}>Radical Red</div>
+        <div onClick={() => handleClick("green")} className={colorScheme === "green" ? "option option-selected" : "option option-unselected"}>Groovy Green</div>
+        <div onClick={() => handleClick("bonetrousle")} className={colorScheme === "bonetrousle" ? "option option-selected option-selected-bonetrousle" : "option option-unselected"}>Deep Dark</div>
+      </div>
+    </div>
+  );
+};
+
+export default UserOptions;
+
+
+/**
 import React, {useState} from 'react';
 import mutation from './mutations/update_user_color_scheme';
 import {graphql} from 'react-apollo';
 import currentUser from './queries/current_user';
 
-/**
- * Panel for selecting user preferences.
- *      mutate: Function, provided by graphql.dgdg
- * Future: Split into ColorMenu and other menus when other options become available.
- */
 
 const UserOptions  = (props) => {
     const [colorScheme, changeColorScheme] = useState(props.colorScheme)
@@ -34,4 +71,4 @@ const UserOptions  = (props) => {
     )
 }
 
-export default graphql(mutation)(UserOptions);
+export default graphql(mutation)(UserOptions);/*
