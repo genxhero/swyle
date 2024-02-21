@@ -1,13 +1,51 @@
+import React, { useState } from 'react';
+import { useMutation } from '@apollo/client';
+import updateImageTitle from './mutations/update_image_title';
+import image from './queries/image';
+
+const ImageTitleEdit = (props) => {
+    const [title, setTitle] = useState(props.title);
+
+    const [updateImageTitleMutation, { loading }] = useMutation(updateImageTitle, {
+        refetchQueries: [{ query: image, variables: { id: props.id } }]
+    });
+
+    const handleFormChange = (field) => {
+        return event => setTitle(event.currentTarget.value);
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        updateImageTitleMutation({
+            variables: {
+                title: title,
+                id: props.id
+            }
+        }).then(res => {
+            props.finishEdit("Title");
+        });
+    };
+
+    return (
+        <div className="edit-title">
+            <form className="edit-title" onSubmit={handleSubmit}>
+                <input className="edit-title-text" type="text" value={title} onChange={handleFormChange("title")}></input>
+                <span className="edit-save-or-cancel">
+                    <input type="submit" value="Save" className="confirm-btn-yes" name="Save" />
+                    <button onClick={props.cancelEdit} className="confirm-btn-no" name="Title">Cancel</button>
+                </span>
+            </form>
+        </div>
+    );
+};
+
+export default ImageTitleEdit;
+
+/**
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import updateImageTitle from './mutations/update_image_title'
 import image from './queries/image';
-
-/**
- * Component for editing the title of an image post.
- * TODO: Merge with article_title_edit, conditionally mutate based on post type
- */
-
 
 class ImageTitleEdit extends Component {
     constructor(props) {
@@ -63,3 +101,4 @@ class ImageTitleEdit extends Component {
 }
 
 export default ImageTitleEdit;
+*/
