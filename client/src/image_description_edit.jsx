@@ -1,13 +1,62 @@
+import React, { useState } from 'react';
+import { useMutation } from '@apollo/client';
+import updateImageDescription from './mutations/update_image_description';
+import image from './queries/image';
+
+const ImageDescriptionEdit = ({ id, description, finishEdit, cancelEdit }) => {
+    const [newDescription, setNewDescription] = useState(description);
+
+    const [updateDescription, { loading }] = useMutation(updateImageDescription, {
+        refetchQueries: [{ query: image, variables: { id: id } }],
+    });
+
+    const handleFormChange = (event) => {
+        setNewDescription(event.currentTarget.value);
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        updateDescription({
+            variables: {
+                description: newDescription,
+                id: id,
+            },
+        }).then(res => {
+            finishEdit("Description");
+        });
+    };
+
+    return (
+        <div className="edit-title">
+            <form className="edit-description" onSubmit={handleSubmit}>
+                <input
+                    className="edit-description-text"
+                    type="text"
+                    value={newDescription}
+                    onChange={handleFormChange}
+                />
+                <span className="edit-save-or-cancel">
+                    <input type="submit" value="Save" className="confirm-btn-yes" name="Save" />
+                    <button onClick={cancelEdit} className="confirm-btn-no" name="Description">Cancel</button>
+                </span>
+            </form>
+        </div>
+    );
+};
+
+export default ImageDescriptionEdit;
+
+
+//old code below
+/**
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import updateImageDescription from './mutations/update_image_description';
 import image from './queries/image';
 
-/**
- * Form for editing the description of an image.
- * TODO: Replace with functional version using hooks
- */
 
+ // Form for editing the description of an image.
+ 
 class ImageDescriptionEdit extends Component {
     constructor(props) {
         super(props)
@@ -62,3 +111,4 @@ class ImageDescriptionEdit extends Component {
 }
 
 export default ImageDescriptionEdit;
+*/
