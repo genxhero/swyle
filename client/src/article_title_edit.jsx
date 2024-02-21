@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useMutation } from 'react-apollo';
+import { useMutation } from '@apollo/client';
 import updateArticleTitle from './mutations/update_article_title';
 import article from './queries/article';
 
