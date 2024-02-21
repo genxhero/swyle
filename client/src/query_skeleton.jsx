@@ -2,7 +2,7 @@
  * The purpose of this file is to provide a blank skeleton for the complex returns required
  * by the Mutation and Query tags.  Honestly, what was wrong with the old way, where it's done at the
  * export level?
- */
+
 
 import React, { Component } from 'react';
 import { Query } from 'react-apollo';
@@ -33,3 +33,4 @@ class ClassName extends Component {
 }
 
 export default ClassName;
+*/
