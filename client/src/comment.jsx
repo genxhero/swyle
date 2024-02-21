@@ -1,17 +1,92 @@
+import React, { useState } from 'react';
+import { useMutation } from '@apollo/client';
+import comments from './queries/comments_by_post';
+import deleteComment from './mutations/delete_comment';
+import CommentEdit from './comment_edit';
+import { MdDelete, MdEdit } from 'react-icons/md';
+
+const Comment = (props) => {
+    const [editing, setEditing] = useState(false);
+    const [confirmationOpen, setConfirmationOpen] = useState(false);
+    const [top, setTop] = useState("0");
+
+    const [deleteCommentMutation] = useMutation(deleteComment);
+
+    const editComment = () => {
+        setEditing(true);
+    };
+
+    const cancelEdit = () => {
+        setEditing(false);
+    };
+
+    const openConfirmationModal = (event) => {
+        event.preventDefault();
+        const theComment = document.getElementById(`the-comment${props.comment.id}`);
+        let newTop = "0";
+        if (theComment.offsetHeight < 120) {
+            newTop = "-1.5rem";
+        }
+        setTop(newTop);
+        setConfirmationOpen(true);
+    };
+
+    const closeConfirmationModal = (event) => {
+        event.preventDefault();
+        setConfirmationOpen(false);
+    };
+
+    const deleteCommentHandler = (event) => {
+        deleteCommentMutation({
+            variables: { id: props.comment.id },
+            refetchQueries: [{ query: comments, variables: { postId: props.postId, postType: props.postType } }]
+        });
+    };
+
+    let colorScheme = "classic";
+    if (props.currentUser) {
+        colorScheme = props.currentUser.colorScheme;
+    }
+
+    if (editing) {
+        return <CommentEdit comment={props.comment} cancelEdit={cancelEdit} postId={props.postId} postType={props.postType} />;
+    } else {
+        return (
+            <div id={`the-comment${props.comment.id}`} key={props.comment.body} className={`comment ${colorScheme}`} style={props.commentStyle}>
+                <div style={{ "display": "flex", "flexDirection": "column" }}>
+                    <p className="comment-body">{props.comment.body}</p>
+                    <span className="comment-who-and-when"> {`${props.comment.commentor.username}, on ${props.comment.createdAt}`}</span>
+                </div>
+                <div className={`comment-buttons ${colorScheme}`}>
+                    {props.currentUser && ((props.currentUser.id === props.comment.commentor.id)) && <span className="comment-btn" onClick={editComment}><MdEdit /> </span>}
+                    {props.currentUser && ((props.currentUser.id === props.comment.commentor.id) || props.currentUser.id === props.articleAuthorId) && <span className="comment-btn" onClick={openConfirmationModal}><MdDelete /></span>}
+                    {confirmationOpen && (
+                        <div className="comment-delete-confirm" style={{ "top": `${top}` }}>
+                            <div className="confirmation-dialog">
+                                <h4>Remove Comment?</h4>
+                                <div style={{ "display": "flex", "justifyContent": "center" }}>
+                                    <button className="confirm-btn-yes" onClick={deleteCommentHandler} value={props.comment.id}>Yes</button>
+                                    <button className="confirm-btn-no" onClick={closeConfirmationModal}>No</button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            </div>
+        );
+    }
+};
+
+export default Comment;
+
+
+/**
 import React, {Component} from 'react';
 import {graphql} from 'react-apollo';
 import comments from './queries/comments_by_post';
 import deleteComment from './mutations/delete_comment';
 import CommentEdit from './comment_edit';
 import { MdDelete, MdEdit } from 'react-icons/md';
-
-
-/**
- * Displays the body, user, and time stamps of a single comment.
- * 
- * TODO: Convert to const format with useState React hook
- */
-
 
 class Comment extends Component {
 
@@ -99,4 +174,4 @@ class Comment extends Component {
 
 }
 
-export default graphql(deleteComment)(Comment);
+export default graphql(deleteComment)(Comment); */
