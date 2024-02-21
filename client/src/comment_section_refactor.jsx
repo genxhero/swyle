@@ -8,7 +8,6 @@
  */
 
 import React, { useState } from 'react';
-import { Mutation } from 'react-apollo';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import postCommentMutation from './mutations/post_comment';
