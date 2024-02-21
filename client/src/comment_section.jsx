@@ -1,3 +1,9 @@
+/**
+ * Deprecated version; the delete subscription was returning errors.'
+ * Might reinstate if I can get the other version of the subscription to work.
+ */
+
+/**
 import React, { Component } from 'react';
 import {Mutation, Query} from 'react-apollo';
 import {Link} from 'react-router-dom';
@@ -5,10 +11,7 @@ import postComment from './mutations/post_comment';
 import commentsByPost from './queries/comments_by_post';
 import Comment from './comment';
 import Subscription from './comment_subscription';
-/**
- * Deprecated version; the delete subscription was returning errors.'
- * Might reinstate if I can get the other version of the subscription to work.
- */
+
 
 class CommentSection extends Component {
 
@@ -98,3 +101,4 @@ class CommentSection extends Component {
 }
 
 export default CommentSection
+*/
