@@ -1,3 +1,164 @@
+import React, { useState } from 'react';
+import { useMutation, useQuery } from '@apollo/client';
+import { Redirect } from 'react-router-dom';
+import gql from 'graphql-tag';
+import moment from 'moment';
+import axios from 'axios';
+
+const ImageCreate = ({ colorScheme, history }) => {
+    const [errors, setErrors] = useState(null);
+    const [image, setImage] = useState(null);
+    const [photoURL, setPhotoURL] = useState(null);
+    const [fileTooBig, setFileTooBig] = useState(false);
+    const [invalidType, setInvalidType] = useState(false);
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+
+    const formatFilename = (filename) => {
+        const date = moment().format('MMDDYYYY');
+        const rando = Math.random().toString(36).substring(2, 7);
+        const cleanFileName = filename.toLowerCase().replace(/[^a-z0-9]/g, '-');
+        const newFileName = `images/${date}-${rando}-${cleanFileName}`;
+        return newFileName.substring(0, 60);
+    };
+
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+
+        if (file.size > 1000000) {
+            setFileTooBig(true);
+            setImage(null);
+            setPhotoURL(null);
+            return;
+        }
+
+        const fileReader = new FileReader();
+        fileReader.onloadend = () => {
+            setImage(file);
+            setPhotoURL(fileReader.result);
+            setFileTooBig(false);
+            setInvalidType(false);
+        };
+        fileReader.readAsDataURL(file);
+    };
+
+    const handleFormChange = (setter) => (event) => setter(event.currentTarget.value);
+
+    const [signS3] = useMutation(S3_SIGN);
+
+    const uploadToS3 = async (file, signedRequest) => {
+        const options = {
+            headers: {
+                'Content-Type': file.type,
+                'Access-Control-Allow-Origin': '*',
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        };
+        try {
+            await axios.put(signedRequest, file, options);
+            console.log('TODO: Get a real logger');
+        } catch (error) {
+            setErrors(['Upload failed at the S3 bucket level, please reach out to the web master.']);
+        }
+    };
+
+    const [postImage] = useMutation(POST_IMAGE, {
+        onCompleted: (data) => {
+            history.push(`/images/${data.createImagePost.id}`);
+        }
+    });
+
+    const save = async (e) => {
+        e.preventDefault();
+        const response = await signS3({
+            variables: {
+                filename: formatFilename(image.name),
+                filetype: image.type
+            }
+        });
+        const { signedRequest, url } = response.data.signS3;
+        await uploadToS3(image, signedRequest);
+        postImage({ variables: { title, description, image: url } });
+    };
+
+    const { loading, data } = useQuery(CURRENT_USER);
+
+    if (loading) return <p>Loading</p>;
+    if (!data.currentUser) return <Redirect to="/login" />;
+
+    return (
+        <div className={`image-creation-page ${colorScheme}`}>
+            <div className="image-input-container">
+                {image ? (
+                    <div className={`image-creation-preview ${colorScheme}`}>
+                        <img src={photoURL} alt="Preview" />
+                    </div>
+                ) : (
+                    <div className={`image-creation-placeholder ${colorScheme}`}>
+                        <p>Your image will appear here in preview</p>
+                    </div>
+                )}
+            </div>
+            <form onSubmit={save} className={`image-creation-form ${colorScheme}`}>
+                <h1>Post a New Image</h1>
+                <label className="image-input">
+                    <input
+                        className={`image-input ${colorScheme}`}
+                        type="file"
+                        onChange={handleFileChange}
+                        accept="image/png, image/jpeg, image/gif, image/bmp, image/jpg"
+                    />
+                </label>
+                <input
+                    className={`image-creation-title ${colorScheme}`}
+                    type="text"
+                    onChange={handleFormChange(setTitle)}
+                    placeholder="Image Title"
+                    value={title}
+                />
+                <input
+                    className={`image-creation-desc ${colorScheme}`}
+                    type="text"
+                    onChange={handleFormChange(setDescription)}
+                    placeholder="Description (optional)"
+                    value={description}
+                />
+                <input type="submit" className={`submit ${colorScheme}`} value="Post Image" disabled={!image} />
+            </form>
+        </div>
+    );
+};
+
+const CURRENT_USER = gql`
+    query {
+        currentUser {
+            id
+            username
+        }
+    }
+`;
+
+const S3_SIGN = gql`
+    mutation SignS3($filename: String!, $filetype: String!) {
+        signS3(filename: $filename, filetype: $filetype) {
+            url
+            signedRequest
+        }
+    }
+`;
+
+const POST_IMAGE = gql`
+    mutation PostImage($title: String!, $description: String, $image: String!) {
+        createImagePost(title: $title, description: $description, image: $image) {
+            id
+        }
+    }
+`;
+
+export default ImageCreate;
+
+
+/**
 import React, {Component} from 'react';
 import postImage from './mutations/post_image';
 import currentUser from './queries/current_user';
@@ -8,9 +169,6 @@ import moment from 'moment';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 
-/**
- * Form for creating an image_post
- */
 
 class ImageCreate extends Component {
     constructor(props) {
@@ -51,10 +209,7 @@ class ImageCreate extends Component {
         });
     }
 
-    /**
-     * Makes the file name of an image somewhat uniform.
-     * @param {string} filename 
-     */
+  
     formatFilename(filename) {
         const date = moment().format("MMDDYYYY");
         const rando = Math.random()
@@ -134,10 +289,10 @@ class ImageCreate extends Component {
    }
 }
 
-/**
- * AWS mojo. 
- * TODO: Write a better comment.
- */
+
+// * AWS mojo. 
+// * TODO: Write a better comment.
+ 
 const s3Sign = gql`
   mutation($filename: String!, $filetype: String!) {
     signS3(filename: $filename, filetype: $filetype) {
@@ -152,4 +307,6 @@ export default compose(
     graphql(currentUser)
 )(
     graphql(postImage)(ImageCreate)
-)
+) 
+
+*/
