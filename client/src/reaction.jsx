@@ -1,3 +1,110 @@
+
+import React, { useState, useEffect } from 'react';
+import { FaRegGrinSquint, FaRegLightbulb, FaRegThumbsUp, FaPepperHot } from 'react-icons/fa';
+import { useMutation, gql } from '@apollo/client';
+import article from './queries/article';
+import image from './queries/image';
+
+const QUERIES = { "Article": article, "ImagePost": image };
+const DELETE_MUTATIONS = {
+    'like': gql`${unlikePost}`,
+    'funny': gql`${deleteFunny}`,
+    'smart': gql`${deleteSmart}`,
+    'spicy': gql`${deleteSpicy}`
+};
+const CREATE_MUTATIONS = {
+    'like': gql`${likePost}`,
+    'funny': gql`${createFunny}`,
+    'smart': gql`${createSmart}`,
+    'spicy': gql`${createSpicy}`
+};
+const ICONS = {
+    'like': FaRegThumbsUp,
+    'funny': FaRegGrinSquint,
+    'smart': FaRegLightbulb,
+    'spicy': FaPepperHot
+};
+
+const Reaction = ({ users, currentUser, reactionType, postType, postId, count }) => {
+    const [currentUserState, setCurrentUserState] = useState(currentUser);
+    const userReacted = currentUserState && users.includes(currentUserState.id);
+    const refetch = QUERIES[postType];
+    const creation = CREATE_MUTATIONS[reactionType];
+    const deletion = DELETE_MUTATIONS[reactionType];
+    const Tag = ICONS[reactionType];
+
+    useEffect(() => {
+        setCurrentUserState(currentUser);
+    }, [currentUser]);
+
+    const [deleteReaction] = useMutation(deletion, {
+        refetchQueries: [{ query: refetch, variables: { id: postId } }]
+    });
+
+    const [createReaction] = useMutation(creation, {
+        refetchQueries: [{ query: refetch, variables: { id: postId } }],
+        onCompleted: (data) => {
+            // Handle success if needed
+        }
+    });
+
+    return (
+        <div className="likes-section">
+            <div className="reaction">
+                {userReacted ?
+                    (
+                        <>
+                            <span className={`reaction-${reactionType}-yes`}
+                                onClick={() => {
+                                    if (!currentUserState) {
+                                        alert("Must be logged in to react");
+                                        return false;
+                                    }
+
+                                    deleteReaction({
+                                        variables: {
+                                            userId: currentUserState.id,
+                                            postId: postId,
+                                            postType: postType
+                                        }
+                                    });
+                                }}>
+                                <Tag />
+                            </span>
+
+                            <span> {count}</span>
+                        </>
+                    ) : (
+                        <>
+                            <span className={`reaction-${reactionType}-no`}
+                                onClick={() => {
+                                    if (!currentUserState) {
+                                        alert("Must be logged in to react");
+                                        return false;
+                                    }
+                                    createReaction({
+                                        variables: {
+                                            userId: currentUserState.id,
+                                            postId: postId,
+                                            postType: postType
+                                        }
+                                    });
+                                }}>
+                                <Tag />
+                            </span>
+
+                            <span> {count}</span>
+                        </>
+                    )
+                }
+            </div>
+        </div>
+    );
+}
+
+export default Reaction;
+
+/**
 import React, { Component } from 'react';
 import { FaRegGrinSquint, FaRegLightbulb, FaRegThumbsUp, FaPepperHot }from 'react-icons/fa';
 import { Mutation } from 'react-apollo';
@@ -17,16 +124,6 @@ const QUERIES = { "Article": article, "ImagePost": image };
 const CREATE_MUTATIONS = {'like': likePost, 'funny': createFunny, 'smart': createSmart, "spicy": createSpicy}
 const DELETE_MUTATIONS = {'like': unlikePost, 'funny': deleteFunny, 'smart': deleteSmart, "spicy": deleteSpicy}
 const ICONS = { 'like': FaRegThumbsUp, 'funny': FaRegGrinSquint, 'smart': FaRegLightbulb, 'spicy': FaPepperHot}
-
-/**
- * Expected Props
- *     users: array of integers, IDs of users who have reacted
- *     reactionType: string, type of reaction
- *     postType: string, type of post.
- *     postId: integer, ID of post.
- *     count: integer, number of current reactions of this type
- *     currentUser: Object representing a user.
- */
 
 class Reaction extends Component {
     constructor(props) {
@@ -133,4 +230,4 @@ class Reaction extends Component {
     }
 }
 
-export default Reaction
+export default Reaction */
