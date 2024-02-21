@@ -71,4 +71,4 @@ const UserOptions  = (props) => {
     )
 }
 
-export default graphql(mutation)(UserOptions);/*
+export default graphql(mutation)(UserOptions);  */
