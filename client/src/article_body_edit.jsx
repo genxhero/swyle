@@ -1,7 +1,77 @@
-/**
- * Edit form for the body of an article
- */
 /* eslint no-restricted-globals: 0 */  // --> OFF
+
+
+import React, { useState } from 'react';
+import { useMutation } from '@apollo/client';
+import updateArticleBody from './mutations/update_article_body';
+import article from './queries/article';
+
+const ArticleBodyEdit = (props) => {
+    const [body, setBody] = useState(props.body);
+
+    const [updateBody] = useMutation(updateArticleBody, {
+        refetchQueries: [{ query: article, variables: { id: props.id } }],
+        onCompleted: () => {
+            props.finishEdit("Body");
+        }
+    });
+
+    const handleFormChange = (event) => {
+        setBody(event.target.value);
+        resizeTextArea();
+    };
+
+    const resizeTextArea = () => {
+        // Resize logic here
+    };
+
+    return (
+        <div className="edit-body">
+            <form
+                className="edit-body"
+                onSubmit={(event) => {
+                    event.preventDefault();
+                    updateBody({
+                        variables: {
+                            body: body,
+                            id: props.id
+                        }
+                    });
+                }}
+            >
+                <textarea
+                    id="body-edit"
+                    type="textarea"
+                    className="edit-body-textarea"
+                    wrap="hard"
+                    cols="40"
+                    onChange={handleFormChange}
+                    value={body}
+                    style={{ height: `${props.bodyEditHeight}px` }}
+                />
+                <span className="edit-save-or-cancel">
+                    <input
+                        type="submit"
+                        value="Save"
+                        className="confirm-btn-yes"
+                        name="Save"
+                    />
+                    <button
+                        onClick={props.cancelEdit}
+                        className="confirm-btn-no"
+                    >
+                        Cancel
+                    </button>
+                </span>
+            </form>
+        </div>
+    );
+};
+
+export default ArticleBodyEdit;
+
+
+/**
 import React, {Component} from 'react';
 import {Mutation} from 'react-apollo';
 import updateArticleBody from './mutations/update_article_body'
@@ -19,10 +89,7 @@ class ArticleBodyEdit extends Component {
         this.resizeTextArea = this.resizeTextArea.bind(this)
     }
 
-    /**
-     * Changes a specific value within state depending on which field is being manipulated
-     * @param {*} field 
-     */
+
     handleFormChange(field) {
         return event =>
           this.setState({
@@ -30,9 +97,7 @@ class ArticleBodyEdit extends Component {
           }, this.resizeTextArea);
     }
 
-    /**
-     * Uses jquery to resize the height of the text area to fit the text as the user types.
-     */
+
     resizeTextArea() {
       // const textArea = document.getElementById("body-edit");
       debugger;
@@ -99,9 +164,8 @@ class ArticleBodyEdit extends Component {
         );
     }
 }
-//                      
+                   
 export default ArticleBodyEdit;
 
-/**
- *  
+ 
  */
