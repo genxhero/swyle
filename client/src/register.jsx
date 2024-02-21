@@ -5,33 +5,9 @@ import gql from 'graphql-tag';
 import $ from 'jquery';
 import ErrorsModal from './errors_modal';
 import { validateEntry } from './helpers';
-import InlineError from './inline_error';
+import REGISTER_USER from './mutations/register';
+import CURRENT_USER from './queries/current_user';
 
-const REGISTER_USER = gql`
-  mutation RegisterUser($email: String!, $username: String!, $password: String!) {
-    createUser(email: $email, username: $username, password: $password) {
-      token
-      user {
-        id
-        username
-        email
-      }
-      errors {
-        message
-      }
-    }
-  }
-`;
-
-const CURRENT_USER = gql`
-  query CurrentUser {
-    currentUser {
-      id
-      username
-      email
-    }
-  }
-`;
 
 const Register = ({ history }) => {
   const [username, setUsername] = useState('');
