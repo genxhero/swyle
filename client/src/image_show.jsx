@@ -8,6 +8,7 @@ import { useParams, useHistory, Link } from 'react-router-dom';
 import { MdDelete, MdNavigateBefore, MdNavigateNext } from 'react-icons/md';
 import Subscription from './image_subscription';
 import images from './queries/images';
+import image from './queries/image';
 import deleteImage from './mutations/delete_image';
 import CommentSection from './comment_section_refactor';
 import LikesSection from './likes_section';
