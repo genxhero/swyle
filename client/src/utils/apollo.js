@@ -23,8 +23,8 @@ const getCableUrl =  () => {
         console.log("Cable Url:", `${protocol}//${host}:${port}/cable?token=${authToken}`)
         return `${protocol}//${host}:${port}/cable?token=${authToken}`;
     } else {
-        console.log("Cable Url:", `${protocol}//swyler.onrender.com//cable?token=${authToken}`)
-        return `${protocol}//swyler.onrender.com//cable?token=${authToken}`;
+        console.log("Cable Url:", `${protocol}//swyler.onrender.com/cable?token=${authToken}`)
+        return `${protocol}//swyler.onrender.com/cable?token=${authToken}`;
     }
 };
 
