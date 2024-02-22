@@ -3,8 +3,10 @@ const fs = require('fs');
 const port = process.env.CABLE_PORT || '3000';
 
 
+//the following should allow the front end to reach the back.
+//fetch(`http://localhost:${port}/graphql`, {
+fetch(`https://swyler.onrender.com/graphql`, {
 
-fetch(`http://localhost:${port}/graphql`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
