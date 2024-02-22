@@ -4,6 +4,14 @@ import { FaRegGrinSquint, FaRegLightbulb, FaRegThumbsUp, FaPepperHot } from 'rea
 import { useMutation, gql } from '@apollo/client';
 import article from './queries/article';
 import image from './queries/image';
+import likePost from './mutations/like_post';
+import unlikePost from './mutations/unlike_post';
+import createFunny from './mutations/create_funny';
+import deleteFunny from './mutations/delete_funny';
+import createSpicy from './mutations/create_spicy';
+import deleteSpicy from './mutations/delete_spicy';
+import createSmart from './mutations/create_smart';
+import deleteSmart from './mutations/delete_smart';
 
 const QUERIES = { "Article": article, "ImagePost": image };
 const DELETE_MUTATIONS = {
