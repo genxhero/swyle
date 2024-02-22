@@ -14,7 +14,12 @@ import CommentSection from './comment_section_refactor';
 import LikesSection from './likes_section';
 
 //TODO fix the props frackup
-const ImageShow = ({ colorScheme, currentUser, match}) => {
+const ImageShow = (props) => {
+
+    const colorScheme = props.colorScheme;
+    const currentUser = props.currentUser;
+    const match = props.match;
+    
     //const { imageID } = useParams();
     const history = useHistory();
 
