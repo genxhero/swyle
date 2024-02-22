@@ -37,7 +37,7 @@ const ImageShow = (props) => {
     };
 
     const { loading, error, data, subscribeToMore } = useQuery(image, {
-        variables: { id: parseInt(imageID) }
+        variables: { id: parseInt(match.params.imageID) }
     });
 
     if (loading) return <div className={`loading-div loading-div-${colorScheme}`}>Loading...</div>;
@@ -61,7 +61,7 @@ const ImageShow = (props) => {
                                 <MdDelete className="post-delete-btn" onClick={deleteImageHandler} />}
                         </div>
                         <div className="image-likes-container">
-                            <LikesSection type={"ImagePost"} currentUser={currentUser} postId={parseInt(imageID)} likers={image.likers} numLikes={image.likeCount} />
+                            <LikesSection type={"ImagePost"} currentUser={currentUser} postId={parseInt(match.params.imageID)} likers={image.likers} numLikes={image.likeCount} />
                         </div>
                     </div>
                     <h2 className="image-show-title">
@@ -77,7 +77,7 @@ const ImageShow = (props) => {
                 </div>
                 <Link className="image-show-carousel" to={`/images/${next}`}><MdNavigateNext /></Link>
             </div>
-            <CommentSection postType={"ImagePost"} currentUser={currentUser} postId={parseInt(imageID)} comments={image.comments} />
+            <CommentSection postType={"ImagePost"} currentUser={currentUser} postId={parseInt(match.params.imageID)} comments={image.comments} />
             <Subscription subscribeToMore={subscribeToMore} />
         </div>
     );
