@@ -4,6 +4,8 @@ import { Redirect } from 'react-router-dom';
 import gql from 'graphql-tag';
 import moment from 'moment';
 import axios from 'axios';
+import postImage from './mutations/post_image';
+import currentUser from './queries/current_user';
 
 const ImageCreate = ({ colorScheme, history }) => {
     const [errors, setErrors] = useState(null);
