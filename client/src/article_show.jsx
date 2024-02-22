@@ -5,6 +5,7 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import article from './queries/article';
+import articles from './queries/articles';
 import deleteArticle from './mutations/delete_article';
 import CommentSection from './comment_section_refactor';
 import ArticleBodyEdit from './article_body_edit';
