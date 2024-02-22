@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useMutation, gql } from '@apollo/client';
-import { currentUser } from './queries/current_user';
+import currentUser  from './queries/current_user';
 
 const UPDATE_USER_COLOR_SCHEME = gql`
   mutation UpdateUserColorScheme($id: ID!, $colorScheme: String!) {
