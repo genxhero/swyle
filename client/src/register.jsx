@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import gql from 'graphql-tag';
 import $ from 'jquery';
 import ErrorsModal from './errors_modal';
+import InlineError from './inline_error';
 import { validateEntry } from './helpers';
 import REGISTER_USER from './mutations/register';
 import CURRENT_USER from './queries/current_user';
