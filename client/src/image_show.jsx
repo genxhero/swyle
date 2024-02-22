@@ -21,7 +21,7 @@ const ImageShow = ({ colorScheme, currentUser }) => {
 
     const deleteImageHandler = (e) => {
         e.preventDefault();
-        const id = parseInt(imageID);
+        const id = parseInt(props.match.params.imageID);
         mutate({
             variables: { id },
             refetchQueries: [{ query: images }]
