@@ -13,15 +13,16 @@ import deleteImage from './mutations/delete_image';
 import CommentSection from './comment_section_refactor';
 import LikesSection from './likes_section';
 
-const ImageShow = ({ colorScheme, currentUser }) => {
-    const { imageID } = useParams();
+//TODO fix the props frackup
+const ImageShow = ({ colorScheme, currentUser, match}) => {
+    //const { imageID } = useParams();
     const history = useHistory();
 
     const [mutate] = useMutation(deleteImage);
 
     const deleteImageHandler = (e) => {
         e.preventDefault();
-        const id = parseInt(props.match.params.imageID);
+        const id = parseInt(match.params.imageID);
         mutate({
             variables: { id },
             refetchQueries: [{ query: images }]
