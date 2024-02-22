@@ -44,7 +44,7 @@ Rails.application.configure do
   # config.action_cable.url = 'wss://afternoon-eyrie-69554.herokuapp.com/cable'
   config.action_cable.url = "wss://#{ENV['RAILS_HOST']}/cable"
   #config.action_cable.allowed_request_origins = ['https://afternoon-eyrie-69554.herokuapp.com/' ]
-  config.action_cable.allowed_request_origins = ['https://afternoon-eyrie-69554.herokuapp.com', 'http://afternoon-eyrie-69554.herokuapp.com']
+  config.action_cable.allowed_request_origins = ['https://afternoon-eyrie-69554.herokuapp.com', 'http://afternoon-eyrie-69554.herokuapp.com', 'https://swyle.onrender.com/', 'https://swyler.onrender.com/']
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
