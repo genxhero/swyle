@@ -45,7 +45,7 @@ const App = ({ client }) => {
   const colorScheme = data?.currentUser?.colorScheme || "standard";
 
   return (
-    <BrowserRouter>
+    <BrowserRouter history={history}>
       <ApolloProvider client={client}>
         <div>
           <Header currentUser={data.currentUser} client={client} colorScheme={colorScheme} />
