@@ -121,7 +121,7 @@ const createErrorLink = () => onError(({ graphQLErrors, networkError, operation 
 })
 
 //first attempt at creatiing new client with cache built in.
-export const createClient = (requestLink) => {
+export const createClient = (requestLink, options) => {
     const client = new ApolloClient({
         link: ApolloLink.from([
             createErrorLink(),
