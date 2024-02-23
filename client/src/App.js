@@ -24,12 +24,14 @@ import { Switch, Route } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { createHashHistory } from 'history';
 import currentUser from './queries/current_user';
-import { createCache, createClient } from './utils/apollo';
+//import { createCache, createClient } from './utils/apollo';
+import { createClient } from './utils/apollo';
 
 
 const history = createHashHistory();
 
-const client = createClient(createCache());
+//const client = createClient(createCache());
+const client = createClient();
 
 const testArea = () => {
   return <div />
