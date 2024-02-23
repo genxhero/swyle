@@ -99,13 +99,13 @@ const createLinkWithToken = () =>
 /**
 uri: '/graphql',
 uri: 'https://swyler.onrender.com/graphql',
-uri: 'tcp://0.0.0.0:10000/graphql',
+uri: 'tcp://0.0.0.0:5000/graphql',
 */
 
 const createHttpLink = () => {
   console.log("Creating HTTPLink");
     return new HttpLink({
-    uri: 'tcp://0.0.0.0:5000/graphql',
+    uri: '/graphql',
     credentials: "include"
   });
 };
