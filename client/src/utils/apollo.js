@@ -1,12 +1,12 @@
 //import { HttpLink } from 'apollo-link-http';
 // Still looking for where Observable comes into play within @apollo/client
-import {  Observable } from 'apollo-link';
+// import {  Observable } from 'apollo-link';
 //import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
 import { ApolloCache, InMemoryCache } from '@apollo/client/cache';
 //import { onError } from 'apollo-link-error';
 import { onError } from '@apollo/client/link/error';
 //import { ApolloClient } from 'apollo-client';
-import { ApolloClient, ApolloLink, HttpLink } from '@apollo/client';
+import { ApolloClient, ApolloLink, HttpLink, Observable  } from '@apollo/client';
 import introspectionQueryResultData from './fragmentTypes.json';
 import ActionCable from 'actioncable';
 import ActionCableLink from 'graphql-ruby-client/subscriptions/ActionCableLink';
