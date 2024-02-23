@@ -5,6 +5,7 @@ import ArticleCard from './article_card';
 import articles from './queries/articles'; 
 
 const ArticlesIndex = (props) => {
+  console.log("Preparing to load data....");
   const { loading, error, data, subscribeToMore } = useQuery(articles, {
     fetchPolicy: 'cache-and-network',
   });
