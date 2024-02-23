@@ -1,10 +1,12 @@
-import { HttpLink } from 'apollo-link-http';
-import { ApolloLink, Observable } from 'apollo-link';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { onError } from 'apollo-link-error';
+//import { HttpLink } from 'apollo-link-http';
+// Still looking for where Observable comes into play within @apollo/client
+import {  Observable } from 'apollo-link';
+//import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
+import { ApolloCache, InMemoryCache } from '@apollo/client/cache';
+//import { onError } from 'apollo-link-error';
+import { onError } from '@apollo/client/link/error';
 //import { ApolloClient } from 'apollo-client';
-import { ApolloClient } from '@apollo/client';
-import { IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
+import { ApolloClient, ApolloLink, HttpLink } from '@apollo/client';
 import introspectionQueryResultData from './fragmentTypes.json';
 import ActionCable from 'actioncable';
 import ActionCableLink from 'graphql-ruby-client/subscriptions/ActionCableLink';
@@ -118,8 +120,25 @@ const createErrorLink = () => onError(({ graphQLErrors, networkError, operation 
     }
 })
 
+//first attempt at creatiing new client with cache built in.
+export const createClient = (requestLink) => {
+    const client = new ApolloClient({
+        link: ApolloLink.from([
+            createErrorLink(),
+            createLinkWithToken(),
+            ApolloLink.split(
+                hasSubscriptionOperation,
+                createActionCableLink(),
+                createHttpLink(),
+            )
+            // createHttpLink(),
+        ]),
+        cache: new InMemoryCache(options)
+    });
+    return client;
+};
 
-
+/**
 export const createClient = (cache, requestLink) => {
     const client = new ApolloClient({
         link: ApolloLink.from([
@@ -136,7 +155,9 @@ export const createClient = (cache, requestLink) => {
     });
     return client;
 };
+/*
 
+/**
 export const createCache = () => {
     const fragmentMatcher = new IntrospectionFragmentMatcher({
         introspectionQueryResultData
@@ -146,4 +167,6 @@ export const createCache = () => {
         window.secretVariableToStoreCache = cache;
     }
     return cache;
-};
+}; */
+
+
