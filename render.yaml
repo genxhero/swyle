@@ -22,7 +22,7 @@ services:
       - key: RAILS_ENV # Imported from Heroku app
         value: production
       - key: RAILS_HOST # Imported from Heroku app
-        value: https://afternoon-eyrie-69554.herokuapp.com
+        value: https://swyler.onrender.com/
       - key: RAILS_LOG_TO_STDOUT # Imported from Heroku app
         value: enabled
       - key: RAILS_SERVE_STATIC_FILES # Imported from Heroku app
