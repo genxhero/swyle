@@ -19,7 +19,7 @@ const getCableUrl =  () => {
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
     // const protocol = 'wss:';
     const host = window.location.hostname;
-    const port = process.env.CABLE_PORT || '3000';
+    const port = process.env.CABLE_PORT || '5000';
     const authToken =  localStorage.getItem('mlToken') || 'loggedouttoken';
     if (process.env.NODE_ENV === 'development') {
         // console.log(`${protocol}//${host}:${port}/cable?token=${authToken}`)
@@ -105,7 +105,7 @@ uri: 'tcp://0.0.0.0:10000/graphql',
 const createHttpLink = () => {
   console.log("Creating HTTPLink");
     return new HttpLink({
-    uri: 'tcp://0.0.0.0:10000/graphql',
+    uri: 'tcp://0.0.0.0:5000/graphql',
     credentials: "include"
   });
 };
