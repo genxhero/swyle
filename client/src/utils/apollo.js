@@ -96,12 +96,16 @@ const createLinkWithToken = () =>
                 };
             })
     );
-
+/**
+uri: '/graphql',
+uri: 'https://swyler.onrender.com/graphql',
+uri: 'tcp://0.0.0.0:10000/graphql',
+*/
 
 const createHttpLink = () => {
   console.log("Creating HTTPLink");
     return new HttpLink({
-    uri: `/graphql`,
+    uri: 'tcp://0.0.0.0:10000/graphql',
     credentials: "include"
   });
 };
