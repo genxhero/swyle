@@ -37,6 +37,7 @@ const getCableUrl =  () => {
 
 const createActionCableLink = () => {
     const cable = ActionCable.createConsumer(getCableUrl());
+    console.log("I made a cable");
     return new ActionCableLink({ cable });
 };
 
@@ -98,7 +99,8 @@ const createLinkWithToken = () =>
 
 
 const createHttpLink = () => {
-  return new HttpLink({
+  console.log("Creating HTTPLink");
+    return new HttpLink({
     uri: `/graphql`,
     credentials: "include"
   });
@@ -122,6 +124,7 @@ const createErrorLink = () => onError(({ graphQLErrors, networkError, operation 
 
 //first attempt at creatiing new client with cache built in.
 export const createClient = (requestLink, options) => {
+    console.log("Preparing to create client...");
     const client = new ApolloClient({
         link: ApolloLink.from([
             createErrorLink(),
@@ -135,6 +138,7 @@ export const createClient = (requestLink, options) => {
         ]),
         cache: new InMemoryCache(options)
     });
+    console.log("Client created!");
     return client;
 };
 
