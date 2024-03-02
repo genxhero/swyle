@@ -105,7 +105,7 @@ uri: 'tcp://0.0.0.0:5000/graphql',
 const createHttpLink = () => {
   console.log("Creating HTTPLink");
     return new HttpLink({
-    uri: '/graphql',
+    uri: 'https://swyler.onrender.com/graphql',
     credentials: "include"
   });
 };
