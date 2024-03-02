@@ -1,2 +1,4 @@
 Build: bundle install && npm install && cd client && npm install --verbose && npm run build --verbose && cd ..
 Start: bundle exec puma -t 5:5 -p ${PORT:-3000} -e ${RACK_ENV:-development} && npm start --prefix client
+
+From App Academy: npm install && npm run render-postbuild && npm run build && npm run sequelize db:migrate && npm run sequelize db:seed:all
