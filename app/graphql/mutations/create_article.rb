@@ -15,8 +15,8 @@ module Mutations
         article.user = context[:current_user]
         
         if article.save 
-          SwyleSchema.subscriptions.trigger("articleAdded", {}, article)
-          
+#          SwyleSchema.subscriptions.trigger("articleAdded", {}, article)
+           SwyleSchema.subscriptions.trigger("articleAdded", {}, Article.all)         
           # { article: article}
           article
         else
