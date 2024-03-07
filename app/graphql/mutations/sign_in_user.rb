@@ -9,8 +9,10 @@ module Mutations
       field :user, Types::UserType, null: true
 
       def resolve(email: nil)
+        debugger
         return unless email
         user = User.find_by email: email[:email].downcase
+        debugger
         if user && user.authenticate(email[:password])
           puts "Authentication SUCCESS FOR #{user.username}"
           puts "Before Reset: #{context[:session][:session_token] } User's: #{user.session_token}"

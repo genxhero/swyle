@@ -46,7 +46,6 @@ class GraphqlController < ApplicationController
   end
 
   def current_user
-    ass = "butt"
     user = User.find_by(session_token: session[:session_token])
     user
   end

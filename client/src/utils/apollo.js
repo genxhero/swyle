@@ -7,7 +7,7 @@ import { ApolloCache, InMemoryCache } from '@apollo/client/cache';
 import { onError } from '@apollo/client/link/error';
 //import { ApolloClient } from 'apollo-client';
 import { ApolloClient, ApolloLink, HttpLink, Observable  } from '@apollo/client';
-import introspectionQueryResultData from './fragmentTypes.json';
+//import introspectionQueryResultData from './fragmentTypes.json';
 import ActionCable from 'actioncable';
 import ActionCableLink from 'graphql-ruby-client/subscriptions/ActionCableLink';
 
@@ -37,7 +37,6 @@ const getCableUrl =  () => {
 
 const createActionCableLink = () => {
     const cable = ActionCable.createConsumer(getCableUrl());
-    console.log("I made a cable");
     return new ActionCableLink({ cable });
 };
 
@@ -103,9 +102,11 @@ uri: 'tcp://0.0.0.0:5000/graphql',
 */
 
 const createHttpLink = () => {
-  console.log("Creating HTTPLink");
+    const uri = process.env.NODE_ENV === 'production' ? 'https://swyler.onrender.com/graphql' : '/graphql';
+    console.log("URI: ", uri);
+     
     return new HttpLink({
-    uri: 'https://swyler.onrender.com/graphql',
+    uri: uri,
     credentials: "include"
   });
 };

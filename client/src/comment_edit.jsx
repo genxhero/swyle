@@ -9,7 +9,7 @@ const CommentEdit = (props) => {
 
     const refetch = props.postType === "Article" ? article : image;
 
-    const [updateCommentMutation, { loading }] = useMutation(updateComment, {
+    const [updateCommentMutation] = useMutation(updateComment, {
         refetchQueries: [{ query: refetch, variables: { id: props.postId } }]
     });
 

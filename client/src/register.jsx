@@ -108,6 +108,7 @@ const Register = ({ history }) => {
             />
             <InlineError message={'Please enter a valid email address.'} visible={emailValid === false} />
           </div>
+          
           {/* Repeat similar pattern for other fields */}
           <div className="form-footer">
             <input className={`submit ${readyToSubmit ? '' : 'disabled'}`} type="submit" name="Register" disabled={!readyToSubmit} />

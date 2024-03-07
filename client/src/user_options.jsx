@@ -1,25 +1,20 @@
 import React, { useState } from 'react';
-import { useMutation, gql } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import currentUser  from './queries/current_user';
+import mutation from './mutations/update_user_color_scheme';
 
-const UPDATE_USER_COLOR_SCHEME = gql`
-  mutation UpdateUserColorScheme($id: ID!, $colorScheme: String!) {
-    updateUserColorScheme(id: $id, colorScheme: $colorScheme) {
-      colorScheme
-    }
-  }
-`;
+const UserOptions = (props) => {
 
-const UserOptions = ({ colorScheme, userId }) => {
-  const [updateUserColorScheme] = useMutation(UPDATE_USER_COLOR_SCHEME, {
+  const [colorScheme, changeColorScheme] = useState(props.colorScheme)
+  const [updateUserColorScheme] = useMutation(mutation, {
     refetchQueries: [{ query: currentUser }],
   });
 
   const handleClick = (colorScheme) => {
     updateUserColorScheme({
-      variables: { id: userId, colorScheme },
+      variables: { id: props.userId, colorScheme },
     }).then((res) => {
-      // Handle response if needed
+      changeColorScheme(res.data.updateUserColorScheme.colorScheme)
     });
   };
 

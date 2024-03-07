@@ -4,11 +4,11 @@
 
 import React from 'react';
 import { useQuery, useMutation } from '@apollo/client';
-import { useParams, useHistory, Link } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { MdDelete, MdNavigateBefore, MdNavigateNext } from 'react-icons/md';
 import Subscription from './image_subscription';
 import images from './queries/images';
-import image from './queries/image';
+import imageShow from './queries/image';
 import deleteImage from './mutations/delete_image';
 import CommentSection from './comment_section_refactor';
 import LikesSection from './likes_section';
@@ -19,7 +19,6 @@ const ImageShow = (props) => {
     const colorScheme = props.colorScheme;
     const currentUser = props.currentUser;
     const match = props.match;
-    
     //const { imageID } = useParams();
     const history = useHistory();
 
@@ -36,7 +35,9 @@ const ImageShow = (props) => {
         });
     };
 
-    const { loading, error, data, subscribeToMore } = useQuery(image, {
+    
+    console.log("Image ID: ", parseInt(match.params.imageID) );
+    const { loading, error, data, subscribeToMore } = useQuery(imageShow, {
         variables: { id: parseInt(match.params.imageID) }
     });
 
@@ -61,7 +62,7 @@ const ImageShow = (props) => {
                                 <MdDelete className="post-delete-btn" onClick={deleteImageHandler} />}
                         </div>
                         <div className="image-likes-container">
-                            <LikesSection type={"ImagePost"} currentUser={currentUser} postId={parseInt(match.params.imageID)} likers={image.likers} numLikes={image.likeCount} />
+                            <LikesSection type={"ImagePost"} currentUser={currentUser} postId={parseInt(image.id)} likers={image.likers} numLikes={image.likeCount} />
                         </div>
                     </div>
                     <h2 className="image-show-title">

@@ -25,9 +25,10 @@ const Login = (props) => {
     const demoLogin = (event) => {
         event.preventDefault();
         setEmail("demo@demo.com");
-        setPassword("demodemo");
+        setPassword("thispasswordisfordemo");
         setPasswordValid(true);
         setEmailValid(true);
+        setErrors(null);
         const submit = document.getElementById("form-submit");
         submit.click();
     }
@@ -86,6 +87,7 @@ const Login = (props) => {
                             }
                         }).then(res => {
                             const token = res.data.signInUser.token
+
                             if (token) {
                                 localStorage.setItem("mlToken", token)
                             }

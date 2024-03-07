@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
+import React  from 'react';
 import { MdThumbUp } from 'react-icons/md';
 import { useMutation } from '@apollo/client';
 import likePost from './mutations/like_post';
 import unlikePost from './mutations/unlike_post';
+import article from './queries/article';
+import image from './queries/image';
+
+
+const QUERIES = { "Article": article, "ImagePost": image };
 
 const LikesSection = (props) => {
-    const [currentUser, setCurrentUser] = useState(props.currentUser);
-    
+     const currentUser = props.currentUser
+
     const handleLikePost = (postId, postType) => {
         if (!currentUser) {
             alert("Must be logged in to like");
@@ -20,7 +25,7 @@ const LikesSection = (props) => {
                 postType: postType
             }
         }).then(res => {
-            // Handle success if needed
+            console.log(res.data)
         });
     };
 
@@ -36,16 +41,17 @@ const LikesSection = (props) => {
                 postType: postType
             }
         }).then(res => {
-            // Handle success if needed
+            console.log(res.data)
+
         });
     };
 
     const [likePostMutation, { loading: likeLoading }] = useMutation(likePost, {
-        refetchQueries: [{ query: props.QUERIES[props.type], variables: { id: props.postId } }]
+        refetchQueries: [{ query: QUERIES[props.type], variables: { id: props.postId } }]
     });
 
     const [unlikePostMutation, { loading: unlikeLoading }] = useMutation(unlikePost, {
-        refetchQueries: [{ query: props.QUERIES[props.type], variables: { id: props.postId } }]
+        refetchQueries: [{ query: QUERIES[props.type], variables: { id: props.postId } }]
     });
 
     const userLikesIt = currentUser && props.likers.includes(currentUser.id);

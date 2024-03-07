@@ -2,7 +2,7 @@
  * TODO: Split this into different modules
  */
 import './stylesheets/App.scss';
-import React, { Component } from 'react';
+import React from 'react';
 //import { ApolloProvider } from "react-apollo"
 //import {Query} from 'react-apollo';
 import { useQuery } from '@apollo/client';
