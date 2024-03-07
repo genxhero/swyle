@@ -125,7 +125,7 @@ const Register = ({ history }) => {
           <div className="session-form-input-wrapper">
             <input className={`auth-field ${password !== passwordConfirm ? 'invalid' : ''}`} type="password" value={passwordConfirm}
               onChange={handleFormChange('passwordConfirm')} />
-            <InlineError message={"Password confirmation must match password"} visible={password !== passwordConfirm} />
+            <InlineError message={"Password confirmation must match password"} visible={password !== passwordConfirm && ! passwordIsPassword} />
           </div>
           <div className="form-footer">
             <input className={`submit ${readyToSubmit ? '' : 'disabled'}`} type="submit" name="Register" disabled={!readyToSubmit} />
