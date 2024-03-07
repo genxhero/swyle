@@ -19,7 +19,7 @@ const getCableUrl =  () => {
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
     // const protocol = 'wss:';
     const host = window.location.hostname;
-    const port = process.env.CABLE_PORT || '5000';
+    const port = process.env.CABLE_PORT || '3000';
     const authToken =  localStorage.getItem('mlToken') || 'loggedouttoken';
     if (process.env.NODE_ENV === 'development') {
         // console.log(`${protocol}//${host}:${port}/cable?token=${authToken}`)
