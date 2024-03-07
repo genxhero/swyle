@@ -4,7 +4,7 @@
  *      currentUser: Object - the user currently in session.
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import NavBar from './navbar';
 import logout from './mutations/logout';
 import { useQuery, useMutation } from '@apollo/client';
@@ -13,13 +13,14 @@ import HeaderSearch from './header_search';
 import { Link } from 'react-router-dom';
 import { FaRegNewspaper, FaImage } from 'react-icons/fa';
 
-const Header = ({ colorScheme }) => {
-    const [currentUser, setCurrentUser] = useState(null);
+const Header = (props) => {
+    const [currentUser, setCurrentUser] = useState(props.currentUser);
+    const colorScheme = props.colorScheme;
     const { data } = useQuery(currentUserQuery);
     const [logoutMutation] = useMutation(logout);
 
     // Update currentUser state when data changes
-    useState(() => {
+    useEffect(() => {
         if (data && data.currentUser) {
             setCurrentUser(data.currentUser);
         } else {
