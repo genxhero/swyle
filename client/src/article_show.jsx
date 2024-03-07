@@ -6,7 +6,6 @@ import React, { useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import article from './queries/article';
 import articles from './queries/articles';
-import deleteArticle from './mutations/delete_article';
 import CommentSection from './comment_section_refactor';
 import ArticleBodyEdit from './article_body_edit';
 import ArticleTitleEdit from './article_title_edit';
@@ -18,6 +17,7 @@ import Tooltip from './tooltip';
 import ReactMarkdown from 'react-markdown';
 import { newOpenModal, newCloseModal } from './utils/utilities';
 import $ from 'jquery';
+import mutation from './mutations/delete_article';
 
 const ArticleShow = (props) => {
     const [editingBody, setEditingBody] = useState(false);
@@ -35,7 +35,7 @@ const ArticleShow = (props) => {
         variables: { id: argument }
     });
 
-    const [deleteArticleMutation] = useMutation(deleteArticle, {
+    const [deleteArticleMutation] = useMutation(mutation, {
         refetchQueries: [{ query: articles }]
     });
 
