@@ -9,19 +9,22 @@ const Trending = ({ colorScheme }) => {
     const [activePane, setActivePane] = useState("likes");
 
     const { loading, data } = useQuery(query);
-
+    
     const selectPane = (event) => {
         const selection = event.target.getAttribute('name');
         setActivePane(selection);
     };
 
+ 
     const sortPosts = (attribute) => {
-        return data.postsByPopularity.sort((a, b) => {
-            const valA = a[attribute];
-            const valB = b[attribute];
+        const posts = [...data.postsByPopularity]
+        
+        return posts.sort((b, a) => {
+            let valA = a[attribute];
+            let valB = b[attribute];
             return (valA < valB) ? -1 : (valA > valB) ? 1 : 0;
         });
-    };
+    }
 
     if (loading) {
         return (
