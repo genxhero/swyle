@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { Redirect } from 'react-router-dom';
-import gql from 'graphql-tag';
 import $ from 'jquery';
 import ErrorsModal from './errors_modal';
 import InlineError from './inline_error';
@@ -108,8 +107,26 @@ const Register = ({ history }) => {
             />
             <InlineError message={'Please enter a valid email address.'} visible={emailValid === false} />
           </div>
-          
-          {/* Repeat similar pattern for other fields */}
+          <span className="session-form-label">Username</span>
+          <div className="session-form-input-wrapper">
+            <input className={`auth-field ${usernameValid === false ? 'invalid' : ''}`} type="text" value={username}
+              onChange={handleFormChange('username')} />
+            <InlineError message={"Letters, numbers, hyphens, and underscores only please"} visible={usernameValid === false} />
+          </div>
+          <span className="session-form-label">Password</span>
+          <div className="session-form-input-wrapper">
+            <input className={`auth-field ${passwordValid === false ? 'invalid' : ''}`} type="password" value={password}
+              onChange={handleFormChange('password')} />
+            <InlineError message={"Password must be six characters or more, non-sequential and with fewer than three repeated characters"} visible={passwordValid === false} />
+            <InlineError message={"PASSWORD is not a valid password! Go stand in the corner!"} visible={passwordIsPassword} />
+          </div>
+
+          <span className="session-form-label">Confirm Password</span>
+          <div className="session-form-input-wrapper">
+            <input className={`auth-field ${password !== passwordConfirm ? 'invalid' : ''}`} type="password" value={passwordConfirm}
+              onChange={handleFormChange('passwordConfirm')} />
+            <InlineError message={"Password confirmation must match password"} visible={password !== passwordConfirm} />
+          </div>
           <div className="form-footer">
             <input className={`submit ${readyToSubmit ? '' : 'disabled'}`} type="submit" name="Register" disabled={!readyToSubmit} />
           </div>
@@ -230,6 +247,7 @@ class Register extends Component {
                                                             onChange={this.handleFormChange('email')} />
                                                         <InlineError message={"Please enter a valid email address."} visible={this.state.emailValid === false} />
                                                     </div>
+
                                                     <span className="session-form-label">Username</span>
                                                     <div className="session-form-input-wrapper">
                                                         <input className={`auth-field ${this.state.usernameValid === false ? 'invalid' : ''}`} type="text" value={this.state.username}
