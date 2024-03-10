@@ -25,7 +25,7 @@ module Mutations
           context[:cookies].signed[:user_id] = user.id
           # This token is used exclusively for websockets
           token = SecureRandom::urlsafe_base64
-          { user: user, token: token, errors: null}
+          { user: user, token: token, errors: nil}
         else 
          { errors: user.errors.full_messages}
         end

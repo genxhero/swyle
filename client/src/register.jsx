@@ -22,8 +22,10 @@ const Register = ({ history }) => {
   const [registerUser, { loading }] = useMutation(REGISTER_USER, {
     update(cache, { data: { createUser } }) {
       // Update cache if needed
+      debugger;
     },
     onError(error) {
+      debugger;
       setErrors(error.graphQLErrors);
     }
   });
@@ -77,10 +79,12 @@ const Register = ({ history }) => {
     event.preventDefault();
     registerUser({ variables: { email, username, password } }).then((res) => {
       const { token, errors: registerErrors } = res.data.createUser;
+      debugger;
       if (token) {
         localStorage.setItem('mlToken', token);
       }
       if (registerErrors) {
+        debugger;
         setErrors(registerErrors);
       } else {
         history.push('/');
