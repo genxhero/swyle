@@ -23,10 +23,10 @@ const getCableUrl =  () => {
     const authToken =  localStorage.getItem('mlToken') || 'loggedouttoken';
     if (process.env.NODE_ENV === 'development') {
         // console.log(`${protocol}//${host}:${port}/cable?token=${authToken}`)
-        console.log("Cable Url:", `${protocol}//${host}:${port}/cable?token=${authToken}`)
+       // console.log("Cable Url:", `${protocol}//${host}:${port}/cable?token=${authToken}`)
         return `${protocol}//${host}:${port}/cable?token=${authToken}`;
     } else {
-        console.log("Cable Url:", `${protocol}//swyler.onrender.com/cable?token=${authToken}`)
+      //  console.log("Cable Url:", `${protocol}//swyler.onrender.com/cable?token=${authToken}`)
         return `${protocol}//swyler.onrender.com/cable?token=${authToken}`;
     }
 };
@@ -102,9 +102,7 @@ uri: 'tcp://0.0.0.0:5000/graphql',
 */
 
 const createHttpLink = () => {
-    const uri = process.env.NODE_ENV === 'production' ? 'https://swyler.onrender.com/graphql' : '/graphql';
-    console.log("URI: ", uri);
-     
+    const uri = process.env.NODE_ENV === 'production' ? 'https://swyler.onrender.com/graphql' : '/graphql';     
     return new HttpLink({
     uri: uri,
     credentials: "include"
@@ -129,7 +127,6 @@ const createErrorLink = () => onError(({ graphQLErrors, networkError, operation 
 
 //first attempt at creatiing new client with cache built in.
 export const createClient = (requestLink, options) => {
-    console.log("Preparing to create client...");
     const client = new ApolloClient({
         link: ApolloLink.from([
             createErrorLink(),
@@ -143,7 +140,6 @@ export const createClient = (requestLink, options) => {
         ]),
         cache: new InMemoryCache(options)
     });
-    console.log("Client created!");
     return client;
 };
 

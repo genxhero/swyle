@@ -49,6 +49,7 @@ const App = () => {
   if (loading) return null;
 
   const colorScheme = data?.currentUser?.colorScheme || "standard";
+  console.log("Current User:", data.currentUser)
 
   return (
        <BrowserRouter history={history}> 
