@@ -9,7 +9,7 @@ import REGISTER_USER from './mutations/register';
 import CURRENT_USER from './queries/current_user';
 
 
-const Register = ({ history }) => {
+const Register = (props) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -22,10 +22,12 @@ const Register = ({ history }) => {
   const [registerUser, { loading }] = useMutation(REGISTER_USER, {
     update(cache, { data: { createUser } }) {
       // Update cache if needed
-      debugger;
+      cache.writeQuery({
+            query: CURRENT_USER,
+            data: {currentUser: {createUser}}
+      })
     },
     onError(error) {
-      debugger;
       setErrors(error.graphQLErrors);
     }
   });
@@ -79,15 +81,13 @@ const Register = ({ history }) => {
     event.preventDefault();
     registerUser({ variables: { email, username, password } }).then((res) => {
       const { token, errors: registerErrors } = res.data.createUser;
-      debugger;
       if (token) {
         localStorage.setItem('mlToken', token);
       }
       if (registerErrors) {
-        debugger;
         setErrors(registerErrors);
       } else {
-        history.push('/');
+        props.history.push('/');
       }
     });
   };
