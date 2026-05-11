@@ -1,41 +1,49 @@
 /* 
   TODO: Split into different scss files and place into a stylesheets folder.
 */
-@import '/about';
-@import '/articles';
-@import '/dashboard';
-@import '/errors';
-@import '/header';
-@import '/images';
-@import '/session';
-@import '/adverts';
-@import '/comments';
-@import '/confirmation';
-@import '/editing';
-@import '/reactions';
-@import '/navigation';
-@import '/search';
-@import '/trending';
-@import '/post_card';
-@import '/tooltips';
-@import '/formatting';
+@import "./about";
+@import "./articles";
+@import "./dashboard";
+@import "./errors";
+@import "./header";
+@import "./images";
+@import "./session";
+@import "./adverts";
+@import "./comments";
+@import "./confirmation";
+@import "./editing";
+@import "./reactions";
+@import "./navigation";
+@import "./search";
+@import "./trending";
+@import "./post_card";
+@import "./tooltips";
+@import "./formatting";
 
-@font-face { /* Undertale */
-    font-family: 'Undertale';
-    src: url('https://vignette2.wikia.nocookie.net/heliosanctus/images/c/c0/Determination.eot');
-    src: url('https://vignette2.wikia.nocookie.net/heliosanctus/images/c/c0/Determination.eot?#iefix') format('embedded-opentype'),
-         url('https://vignette3.wikia.nocookie.net/heliosanctus/images/a/aa/Determination.woff2') format('woff2'),
-         url('https://vignette3.wikia.nocookie.net/heliosanctus/images/3/37/Determination.woff') format('woff'),
-         url('https://vignette2.wikia.nocookie.net/heliosanctus/images/c/cd/Determination.ttf') format('truetype'),
-         url('https://vignette3.wikia.nocookie.net/heliosanctus/images/7/7f/Determination.svg#Undertale') format('svg');}
+@font-face {
+  /* Undertale */
+  font-family: "Undertale";
+  src: url("https://vignette2.wikia.nocookie.net/heliosanctus/images/c/c0/Determination.eot");
+  src:
+    url("https://vignette2.wikia.nocookie.net/heliosanctus/images/c/c0/Determination.eot?#iefix")
+      format("embedded-opentype"),
+    url("https://vignette3.wikia.nocookie.net/heliosanctus/images/a/aa/Determination.woff2")
+      format("woff2"),
+    url("https://vignette3.wikia.nocookie.net/heliosanctus/images/3/37/Determination.woff")
+      format("woff"),
+    url("https://vignette2.wikia.nocookie.net/heliosanctus/images/c/cd/Determination.ttf")
+      format("truetype"),
+    url("https://vignette3.wikia.nocookie.net/heliosanctus/images/7/7f/Determination.svg#Undertale")
+      format("svg");
+}
 
-::placeholder{
+::placeholder {
   color: white;
-  opacity: .6;
+  opacity: 0.6;
 }
 
 body {
-   background: #001935;
+  background: #001935;
   //  &-red{
   //   background: #630909
   // }
@@ -59,9 +67,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-   background: #001935;
-   &-red{
-    background: #630909
+  background: #001935;
+  &-red {
+    background: #630909;
   }
   &-green {
     background: #07460b;
@@ -70,20 +78,20 @@ body {
 
 .post-edit-btn {
   font-size: 24px;
-  padding:.5rem;
+  padding: 0.5rem;
   // position: absolute;
   // // right: .5rem;
   // // top: 0;
-  padding: .5rem;
+  padding: 0.5rem;
   border-radius: 5px;
-  &:hover{
+  &:hover {
     cursor: pointer;
     color: blue;
   }
 
-  &.bonetrousle{
+  &.bonetrousle {
     color: white;
-    &:hover{
+    &:hover {
       background: white;
       color: black;
     }
@@ -98,20 +106,20 @@ body {
 
 .post-delete-btn {
   font-size: 24px;
-  padding: .5rem;
-  text-shadow: 2px 1px 1px 1px white;;
-  background: rgba(255, 255, 255, .2);
+  padding: 0.5rem;
+  text-shadow: 2px 1px 1px 1px white;
+  background: rgba(255, 255, 255, 0.2);
 }
 .post-delete-btn:hover {
   cursor: pointer;
   color: blue;
-  transition: all .1s;
+  transition: all 0.1s;
 }
 
 .delete-btn-container {
   position: absolute;
-  left: .5rem;
-  top: .5rem;
+  left: 0.5rem;
+  top: 0.5rem;
 }
 
 .submit {
@@ -121,17 +129,17 @@ body {
   color: white;
   font-weight: bold;
   font-family: sans-serif;
-  padding: .6rem;
-  margin: .2rem;
+  padding: 0.6rem;
+  margin: 0.2rem;
   width: fit-content;
   &:hover {
     cursor: pointer;
-    background:#659bb1;
-    transition: all .2s;
+    background: #659bb1;
+    transition: all 0.2s;
   }
 
   &.red {
-    background: #590A0A;
+    background: #590a0a;
     &:hover {
       background: rgb(156, 30, 30);
     }
@@ -140,7 +148,7 @@ body {
   &.green {
     background: #093009;
     &:hover {
-      background: #166616
+      background: #166616;
     }
   }
 
@@ -159,11 +167,10 @@ body {
     background: gray;
     &:hover {
       background: gray;
-      cursor:not-allowed;
+      cursor: not-allowed;
     }
   }
 }
-
 
 .demo-login {
   border-radius: 5px;
@@ -172,12 +179,12 @@ body {
   background: white;
   font-weight: bold;
   font-family: sans-serif;
-  padding: .6rem;
-  margin: .2rem;
+  padding: 0.6rem;
+  margin: 0.2rem;
   width: fit-content;
-  &:hover{
-      color:#659bb1;
-      cursor: pointer;
+  &:hover {
+    color: #659bb1;
+    cursor: pointer;
   }
 }
 
